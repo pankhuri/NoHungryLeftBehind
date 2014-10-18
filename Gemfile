@@ -30,6 +30,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'gmaps4rails'
+gem 'pry-byebug'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
