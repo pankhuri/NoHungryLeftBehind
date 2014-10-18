@@ -1,0 +1,452 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+::selection {
+  background: #cc6060; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #cc6060; /* Gecko Browsers */
+}
+
+/*############# Font face declared starts #############*/
+
+@font-face {
+    font-family: 'bebasregular';
+    src: url('../fonts/bebas___-webfont.eot');
+    src: url('../fonts/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bebas___-webfont.woff2') format('woff2'),
+         url('../fonts/bebas___-webfont.woff') format('woff'),
+         url('../fonts/bebas___-webfont.ttf') format('truetype'),
+         url('../fonts/bebas___-webfont.svg#bebasregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/*############# Font face declared starts #############*/
+
+
+/*############## LESS Elements ################*/
+@white: #ffffff;
+@red:#cc6060;
+@red-lighten: lighten(#cc6060, 5%);
+@green:#71c7ae;
+@green-lighten: lighten(#71c7ae, 5%);
+
+ 
+
+.rounded(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.nav-rounded(@radius: 23px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.rounded-zero(@radius: 0px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.opacity(@opacity: 0.85) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
+}
+
+.opacity-full(@opacity: 100) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
+}
+
+.transition(@duration: all .6s ease-in) {
+    -moz-transition: @duration;
+    -webkit-transition: @duration;
+    -o-transition: @duration;
+    transition: @duration;
+}
+
+.boxShadow-none-btn {
+	-webkit-box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
+	-moz-box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
+	-o-box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
+	box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+ 
+
+.hover {
+.transition;
+}
+
+.boxShadow-none {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+}
+
+ .zero-mg-pd {
+    margin: 0;
+    padding: 0;
+}
+
+.outline-none {
+    outline: 0;
+    border: none;
+}
+
+/*############## Common classes defined ################*/
+
+.float-left {
+    float: left;
+	width: 100%;
+}
+
+.float-right {
+    float: right;
+	width: 100%;
+}
+
+ /*############## LESS Elements ends ################*/
+
+
+/*############## Common btns defined starts ################*/
+
+body a.red-button,
+.red-button {
+background:@red;
+border: 1px solid #9f4040;
+.nav-rounded;
+.boxShadow-none-btn;
+color:@white;
+display: inline-block;
+font-family: "bebasregular";
+font-size: 21px;
+line-height: normal;
+padding:19px 35px 10px;
+}
+body a.red-button:hover,
+.red-button:hover {
+.hover;
+background:@red-lighten;
+}
+
+body a.green-button,
+.green-button {
+background:@green;
+border: 1px solid #408571;
+.nav-rounded;
+.boxShadow-none-btn;
+color:@white;
+display: inline-block;
+font-family: "bebasregular";
+font-size: 21px;
+line-height: normal;
+padding: 19px 35px 10px;
+}
+body a.green-button:hover,
+.green-button:hover {
+.hover;
+background:@green-lighten;
+}
+
+/*############## Common btns defined ends ################*/
+
+
+
+/*############## Common btns defined ends ################*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    .zero-mg-pd;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: normal;
+    font-family: 'Roboto', sans-serif;
+	color:inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, input, textarea, submit, button, small, strong {
+    line-height: normal;
+    border: none;
+    outline: 0;
+    text-align: inherit;
+    font-family: 'Roboto', sans-serif;
+    color: inherit;
+    .zero-mg-pd;
+	-webkit-font-smoothing: subpixel-antialiased; 
+	-webkit-text-shadow: rgba(255, 255, 255, 0.01) 0 0 1px;
+	webkit-text-stroke: 0.35px; -webkit-text-stroke-width: 0.1px;
+}
+
+ul, ol, li {
+    list-style: none;
+    .zero-mg-pd;
+}
+
+a {
+    color:@white;
+    text-decoration: none;
+    .outline-none
+}
+
+    a:link {
+        color: inherit;
+        text-decoration: none;
+        .outline-none
+    }
+
+    a:visited {
+        color: inherit;
+        text-decoration: none;
+        .outline-none
+    }
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+        .outline-none
+    }
+
+    a:active {
+        color: inherit;
+        text-decoration: none;
+        .outline-none
+    }
+/*Content follows box model*/
+input {
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+    input::-moz-focus-inner /*Remove button padding in FF*/ {
+        border: 0;
+        padding: 0;
+    }
+
+img {
+    width: 100%;
+    display: block;
+    height: auto;
+    border: 0;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+    min-height: 100%;
+    min-width: 100%;
+    position: relative;
+    z-index: 0;
+}
+
+/*############## top navigation css starts ################*/
+
+
+.header-outer { 
+	background:url('/assets/main-background.jpg') no-repeat 0 0;
+	.navbar-brand {
+		height: 131px;
+		line-height: normal;
+		padding: 0 0 0 15px;
+		width: 222px;
+	}
+	.navbar-default {
+		border:none;
+		background:none;
+	}
+	.navbar {
+	   .rounded-zero;
+	}
+
+	.navbar-right {
+	margin:49px 0 0;
+	 
+	  .red-button {
+	    margin-right:25px;
+	  }
+	}
+	
+	.title-main {
+	   padding: 70px 0 52px;
+	   
+		h1 {
+			font-size:57px;
+			color:@white;
+			text-align:center;
+			font-family: 'bebasregular';
+			text-shadow: 1px 3px 2px #000000;	
+			word-spacing: 8px;
+		}
+	}
+	
+	.banner {
+		img { 
+			display: block;
+			margin: 0 auto;
+			width: 401px;
+			margin-bottom:48px;
+		}
+		h2 {
+			color: #ffffff;
+			font-size: 47px;
+			font-weight: 100;
+			padding: 0 118px 57px;
+			text-align: center;
+			line-height:56px;
+		}
+	}
+	
+}
+
+/**** Scroll down button common  ****/
+.scroll-down { 
+    margin:0 auto 35px;
+	display:block;
+	width:50px;
+	height:52px;
+	background:url(/assets/sprite.png) no-repeat -10px -5px;
+	cursor:pointer;
+}
+
+/**** Scroll down button common  ****/
+
+
+@media(max-width:1200px) {
+
+.header-outer .title-main h1 {
+    font-size: 48px;
+}
+.header-outer .banner h2 {
+    font-size: 43px;
+    padding: 0 52px 57px;
+}
+
+}
+
+@media(max-width:992px) { 
+body a.red-button, .red-button,
+body a.green-button, .green-button{
+font-size: 14px;
+ padding: 15px 23px 9px;
+}
+.header-outer .navbar-right {
+    margin: 57px 0 0;
+}
+.header-outer .title-main h1 {
+    font-size: 35px;
+}
+.header-outer .navbar-right .red-button {
+    margin-right: 15px;
+}
+.header-outer .banner h2 {
+    font-size: 33px;
+    line-height: normal;
+    padding: 0 36px 40px;
+}
+}
+
+
+@media(max-width:767px) { 
+.header-outer .navbar-brand {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    padding: 0;
+}
+.header-outer .navbar-right {
+    margin: 14px 0 0 0;
+	text-align: center;
+}
+.header-outer .title-main {
+    padding: 24px 10px 50px;
+}
+.header-outer .title-main h1 {
+    font-size: 21px;
+    word-spacing: 5px;
+}
+.header-outer {
+    overflow: hidden;
+}
+
+}
+
+@media(max-width:479px) { 
+
+.header-outer .navbar-right .red-button {
+    margin-bottom: 15px;
+    margin-right: 0;
+}
+
+.header-outer .title-main h1 {
+    line-height: 32px;
+    word-spacing: 5px;
+}
+
+.header-outer .banner img {
+    width: 100%;
+}
+
+.header-outer .banner h2 {
+    font-size: 24px;
+}
+
+}
+
+
+.panel1 {
+background:url('/assets/panel-1.jpg') no-repeat 0 0;
+min-height:796px;
+}
+.panel2 {
+background:url('/assets/panel-2.jpg') no-repeat 0 0;
+min-height:796px;
+}
+.panel3 {
+background:url('/assets/panel-3.jpg') no-repeat 0 0;
+min-height:796px;
+}
+
+
+
+
+

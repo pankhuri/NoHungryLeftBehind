@@ -9,7 +9,6 @@ class LocationsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location[:lat]
       marker.lng location[:lng]
-      debugger
       marker.picture({
                   :url => "https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png",
                   :width   => 32,
