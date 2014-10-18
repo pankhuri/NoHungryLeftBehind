@@ -1,0 +1,2 @@
+class DropLocation < Location
+end
