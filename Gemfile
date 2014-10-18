@@ -8,6 +8,10 @@ gem 'mysql2'
 
 gem 'pg'
 
+gem 'ancestry'
+
+gem "geocoder"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

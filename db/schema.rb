@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018064951) do
+ActiveRecord::Schema.define(version: 20141018103435) do
 
   create_table "donations", force: true do |t|
     t.integer  "user_id"
@@ -24,11 +24,15 @@ ActiveRecord::Schema.define(version: 20141018064951) do
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.decimal  "latitude",   precision: 10, scale: 0
-    t.decimal  "longitude",  precision: 10, scale: 0
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "type"
+    t.string   "ancestry"
   end
+
+  add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
