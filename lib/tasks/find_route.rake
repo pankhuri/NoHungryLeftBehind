@@ -2,7 +2,7 @@ namespace :db do
 
   desc 'Seed Routes Between Happiness Truck Location Stops'
   task :seed_routes => :environment do
-    Location.all.reverse.each do |location|
+    Location.all.each do |location|
       
       origin_location = location
       if origin_location.has_children?
@@ -13,7 +13,7 @@ namespace :db do
         route_file = CSV.open("public/routes.csv", "a")
       
         routes = Location.route_steps(origin_lat_long, destination_lat_long)
-        route_file << [origin_location.name.concat(" - #{destination_location.name}")  , origin_location.latitude, origin_location.latitude , routes]
+        route_file << [origin_location.name.concat(" - #{destination_location.name}")  , origin_location.latitude, origin_location.latitude , routes.to_json]
       else
         puts "No children of location :  #{origin_location.name} : #{origin_location.id}"
       end
