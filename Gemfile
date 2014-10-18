@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'gmaps4rails'
 gem 'pry-byebug'
 gem 'less-rails-bootstrap'
+#gem 'google_directions'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
