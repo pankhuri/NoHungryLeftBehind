@@ -4,17 +4,36 @@
 
 <!-- Google map div -->
 <div style='width: 800px;'>
-  <div id="multi_markers" style='width: 800px; height: 400px;'></div>
+  <div id="feed_map" style='width: 1200px; height: 600px;'></div>
 </div>
     
 
 
 <script>
 // method to call to create map
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
+function calcRoute() {
+  var origin      = new google.maps.LatLng(43, 3.5);
+  var destination = new google.maps.LatLng(51, 3.5);
+  var request = {
+      origin:      origin,
+      destination: destination,
+      travelMode:  google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+calcRoute();
+
 function initialize(){
 	
 	var handler = Gmaps.build('Google');
-	handler.buildMap({ internal: {id: 'multi_markers'}}, function(){
+	handler.buildMap({ internal: {id: 'feed_map'}}, function(){
 	  var markers = handler.addMarkers([
 	    { lat: 43, lng: 3.5},
 	    { lat: 45, lng: 4},
@@ -24,9 +43,11 @@ function initialize(){
 	  ]);
 	  handler.bounds.extendWith(markers);
 	  handler.fitMapToBounds();
+	  directionsDisplay.setMap(handler.getMap());
 	});
-
 }
+
 google.maps.event.addDomListener(window, "load", initialize);
+
 
 </script>
