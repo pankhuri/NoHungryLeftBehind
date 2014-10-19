@@ -164,9 +164,11 @@ var happiness_form = function(){
     value: 0,
     min: 0,
     max: 35,
+		slide: function(event, ui){
+ 		 	happiness_unit(ui.value);
+		},
     change: function( event, ui ) {
      $( "#amount" ).val( ui.value );
-		 happiness_unit(ui.value);
    }
  });
  
