@@ -19,18 +19,17 @@
 //= require_tree .
 
 $(function () {
-  var latLongs = {"locations":[{"latitude":"23", "longitude":"34", "position":"2"},{"latitude":"23", "longitude":"34", "position":"2"}]}
+  var latLongs = [{"latitude":"23", "longitude":"34", "position":"2"},{"latitude":"23", "longitude":"34", "position":"2"}]
   // var latLongs = JSON.parse(data);
   // var currentPosition = initialLatLong
 
-  var initialLatLong = {}
+  // var initialLatLong = {}
 
   $.get('truck_locations/last', function(data){
     currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
-    drawPolyline(initialLatLong, currentPosition)
+    locations = latLongs.slice(0,currentPosition.position)
+    drawPolyline(locations, 'green')
   });
-
-  setTimeout(worker, 5000);
 
   var worker = function(){
     currentPosition = getNextLocationFromJson(currentPosition)
@@ -56,6 +55,8 @@ $(function () {
     });
   };
 
+  setTimeout(worker, 5000);
+
   var updateLocation = function(stopType, currentPosition){
     $.ajax({
       url: stopType + '/update',
@@ -76,58 +77,42 @@ $(function () {
       currentPosition = latLongs[0]
       currentPosition["position"] = 0
     }
+    return currentPosition
   };
 
 
 });
-var directionsDisplay = new google.maps.DirectionsRenderer();
-var directionsService = new google.maps.DirectionsService();
 
-function drawPolyline(startLocation,destinationLocation) {
-  var origin      = new google.maps.LatLng(startLocation.latitude, startLocation.longitude);
-  var destination = new google.maps.LatLng(destinationLocation.latitude, destinationLocation.longitude);
-  var request = {
-    origin:      origin,
-    destination: destination,
-    travelMode:  google.maps.TravelMode.DRIVING
-  };
-  directionsService.route(request, function(response, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(response);
-    }
+function drawPolyline(locations, color) {
+  var truckRouteCoordinates = [];
+  for(i =0;i<locations.length;i++)
+  { 
+    truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
+  }
+
+
+  var truckPath = new google.maps.Polyline({
+    path: truckRouteCoordinates,
+    geodesic: true,
+    strokeColor: color,
+    strokeOpacity: 2.0,
+    strokeWeight: 4
   });
+
+  return truckPath
+
 }
 
 function initializeMap(locations)
 {
 
-   var truckRouteCoordinates = [];
-    for(i =0;i<locations.length;i++)
-    { 
-      truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
-    }
-  var mapOptions = {
-    zoom: 3,
-    center: new google.maps.LatLng(0, -180),
-    mapTypeId: google.maps.MapTypeId.DRIVING
-  };
-  var truckPath = new google.maps.Polyline({
-    path: truckRouteCoordinates,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 2.0,
-    strokeWeight: 4
-  });
-
+  truckPath = drawPolyline(locations, '#FF0000')
   var handler = Gmaps.build('Google');
 
   handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    directionsDisplay.setMap(handler.getMap());
     truckPath.setMap(handler.getMap());
   });
 }
-
-
