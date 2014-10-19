@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-@uttam_nagar     = PickUpLocation.create(name: "Uttam Nager")
-@district_center = PickUpLocation.create(name: "District Center", parent_id: @uttam_nagar.id )
-@janakpuri       = DropLocation.create(name: "Janakpuri East", parent_id: @district_center.id)
+@uttam_nagar     = PickUpLocation.create(name: "Uttam Nager West")
+@district_center = PickUpLocation.create(name: "Janakpuri District Center", parent_id: @uttam_nagar.id )
+@janakpuri       = DropLocation.create(name: "Janakpuri East Metro Station", parent_id: @district_center.id)
 @tilak           = PickUpLocation.create(name: "Tilak Nagar", parent_id: @janakpuri.id)
 @subhash         = PickUpLocation.create(name: "Subhash Nagar", parent_id: @tilak.id)
 @tagore          = DropLocation.create(name: "Tagore Garden", parent_id: @subhash.id)
@@ -21,3 +21,18 @@
 @rajendre        = PickUpLocation.create(name: "Rajendre Place", parent_id: @patel.id)
 @karol           = PickUpLocation.create(name: "Karol Baagh", parent_id: @rajendre.id)
 @jhandewalan     = DropLocation.create(name: "Jhandewalan", parent_id: @karol.id)
+@ramakrishna_ashram_marg = PickUpLocation.create(name: "Ramakrishna Ashram Marg", parent_id: @jhandewalan.id)
+@janpath = PickUpLocation.create(name: "Janpath", parent_id: @ramakrishna_ashram_marg.id)
+@tal_katora_stadium = PickUpLocation.create(name: "Talkatora Stadium", parent_id: @janpath.id)
+@patel_chowk_metro = DropLocation.create(name: "Patel Chowk Metro", parent_id: @tal_katora_stadium.id)
+@karnatka_bhawan = PickUpLocation.create(name: "Karnatka Bhawan", parent_id: @patel_chowk_metro.id)
+@dhaula_kuan = PickUpLocation.create(name: "Dhaula kuan", parent_id: @karnatka_bhawan.id)
+@gopi_nath_bazaar = PickUpLocation.create(name: "Gopi nath bazaar", parent_id: @dhaula_kuan.id)
+@nangal_village = DropLocation.create(name: "Nangal Village", parent_id: @gopi_nath_bazaar.id)
+@dabri = PickUpLocation.create(name: "Dabri", parent_id: @nangal_village.id)
+@sita_puri = PickUpLocation.create(name: "Sita puri", parent_id: @dabri.id)
+@asalatpur_village = DropLocation.create(name: "Asalatpur Village", parent_id: @sita_puri.id)
+Location.update_all(:city => "New Delhi")
+
+
+

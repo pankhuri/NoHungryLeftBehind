@@ -11,6 +11,10 @@ R14Team265::Application.routes.draw do
 
   put "truck_locations/last" => "truck_locations#update"
 
+  put "pick_up_location/update" => "pick_up_locations#update"
+
+  put "drop_location/update" => "drop_locations#update"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
