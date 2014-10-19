@@ -66,3 +66,31 @@ $(function () {
 
 
 });
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
+
+function drawPolyline(startLocation,destinationLocation) {
+  var origin      = new google.maps.LatLng(startLocation.latitude, startLocation.longitude);
+  var destination = new google.maps.LatLng(destinationLocation.latitude, destinationLocation.longitude);
+  var request = {
+    origin:      origin,
+    destination: destination,
+    travelMode:  google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+function initializeMap(locations){
+
+  var handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
+    markers = handler.addMarkers(locations);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    directionsDisplay.setMap(handler.getMap());
+  });
+}
