@@ -13,5 +13,10 @@ class LocationsController < ApplicationController
       marker.json({:title => "DSdsdf"})
     end
   end
+
+  def reset
+    @locations = Location.stop_locations
+    @locations.update_all(is_passed: true)
+  end
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141019045353) do
+ActiveRecord::Schema.define(version: 20141019102717) do
 
   create_table "donations", force: true do |t|
     t.integer  "user_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20141019045353) do
     t.string   "ancestry"
     t.string   "city"
     t.integer  "position",   default: 0
+    t.boolean  "is_passed",  default: false
   end
 
   add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
