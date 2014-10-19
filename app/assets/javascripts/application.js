@@ -125,12 +125,36 @@ function drawPolyline(locations, color) {
   }
 
 
+  var symbolTwo = {
+    path: 'M -1,0 A 1,1 0 0 0 -3,0 1,1 0 0 0 -1,0M 1,0 A 1,1 0 0 0 3,0 1,1 0 0 0 1,0M -3,3 Q 0,5 3,3',
+    strokeColor: '#00F',
+    rotation: 45
+  };
+
+   var truckRouteCoordinates = [];
+    for(i =0;i<locations.length;i++)
+    { 
+      truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
+    }
+  var mapOptions = {
+    zoom: 3,
+    center: new google.maps.LatLng(0, -180),
+    mapTypeId: google.maps.MapTypeId.DRIVING
+  };
+
   var truckPath = new google.maps.Polyline({
     path: truckRouteCoordinates,
     geodesic: true,
     strokeColor: color,
     strokeOpacity: 2.0,
-    strokeWeight: 4
+    strokeWeight: 4,
+    icons: [
+     {
+        icon: symbolTwo,
+        offset: '50%'
+      }
+    ]
+
   });
 
   return truckPath
