@@ -22,7 +22,7 @@
 			<label class="col-sm-4 control-label">Phone</label>
 			<div class="col-sm-8">
 				<%= text_field_tag "[donation][user][phone]", "", :class => "form-control" %>
-			   <small class="message"> We will be able to call you, if necessary. </small>
+			   <small class="message"> We will be able to call you. </small>
 			</div>
 		  </div>
 			
@@ -41,7 +41,7 @@
 				<%= f.select :location_id, PickUpLocation.all.collect{|location|[location.name, location.id]}, {}, :id=>"speed", :class=>"form-control", :include_blank => "Select" %>
 
 			<span class="green-input"> <!-- w3c empty validate --> </span>	
-			  <small class="message"> The Happiness Truck will be there for you ! </small>
+			  <small class="message"> See you there. </small>
 			</div>
 		  </div>
 		  
@@ -80,7 +80,6 @@
 			<div class="indicator"> 
 				<h4 class="location-title"> <%= location.name %> </h4> 
 				<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-				<h5 class="time"> 18:00 </h5>  
 			</div>
 		<% end %>
 		
@@ -94,3 +93,8 @@
 <% end%>
 </div>
 	
+<script>
+$(document).ready(function(){
+$("#ui-datepicker-div").addClass("custom-calendar");	
+});
+</script>
