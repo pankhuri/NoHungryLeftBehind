@@ -3,7 +3,6 @@ class TruckLocationsController < ApplicationController
   respond_to :json, :html, :js
   
   def update
-    byebug
     @truck_location = TruckLocation.last
     if !@truck_location
       @truck_location = TruckLocation.new
