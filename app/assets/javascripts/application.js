@@ -26,6 +26,9 @@ var handler = Gmaps.build('Google');
 
 $(function () {
 	
+	$("#rumble2014").css({"width":"auto", "padding": "10px 25px", "font-family": "Oswald', sans-serif"});
+	$("#rumble2014 a").css({"font-weight": "normal", "font-family": "Oswald', sans-serif"});
+	
   $(".scroll-down").click(function (event) {
    event.preventDefault();
    $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
