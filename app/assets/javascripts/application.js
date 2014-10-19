@@ -255,12 +255,13 @@ var string_empty = function(str){
 }
 
 var verifyLocationChanged = function(){
-  var indicatorIcon =  $(".indicator-icon").not("indicator-icon-active-green").first()
+  var indicatorIcon =  $(".indicator-icon").not(".indicator-icon-active-green").first()
   var locationId = indicatorIcon.parents('.indicator').find("#location_id_").val()
   $.ajax({
-    url: '/location/locationId',
+    url: '/locations/'+ locationId,
     type: 'GET',
     success: function(location) {
+
       if (location.is_passed){
         indicatorIcon.addClass("indicator-icon-active-green")
       }
@@ -271,6 +272,8 @@ var verifyLocationChanged = function(){
 
 $(function () {
   
+  verifyLocationChanged();
+
   $("#rumble2014").css({"width":"auto", "padding": "10px 25px", "font-family": "Oswald', sans-serif"});
   $("#rumble2014 a").css({"font-weight": "normal", "font-family": "Oswald', sans-serif"});
   

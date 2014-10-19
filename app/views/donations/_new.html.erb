@@ -80,7 +80,7 @@
 			<div class="indicator"> 
 				<%= hidden_field_tag("location_id[]", location.id) %>
 				<h4 class="location-title"> <%= location.name %> </h4>
-				<i class=<%= indicator_icon(location) %>>
+				<i class="indicator-icon <%= indicator_icon(location) %>">
 				 <!-- w3c empty div validate --> </i> 
 			</div>
 		<% end %>
