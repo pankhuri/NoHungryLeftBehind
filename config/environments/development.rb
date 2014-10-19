@@ -26,4 +26,7 @@ R14Team265::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  
+  GOOGLE_API_KEY = "AIzaSyDrvG6eGeS5hc_Xr6HLHj0DotBRWy9h63c"
+  
 end

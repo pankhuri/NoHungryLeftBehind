@@ -79,4 +79,7 @@ R14Team265::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  
+  GOOGLE_API_KEY = "AIzaSyDrvG6eGeS5hc_Xr6HLHj0DotBRWy9h63c"
+  
 end
