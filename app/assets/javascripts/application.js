@@ -18,6 +18,7 @@
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require jquery.backgroundSize
+//= require jquery.parallax-1.1.3
 //= require_tree .
 
 var handler = Gmaps.build('Google');
@@ -164,6 +165,68 @@ function initializeMap(locations){
     }
     return currentPosition
   };
+	
+	$(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
+ 
+	$('.close-spread, .open-close').click(function () {
+	    // Set the effect type
+	    var effect = 'slide';
+	    // Set the options for the effect type chosen
+	    var options = { direction: 'right' };
+	    // Set the duration (default: 400 milliseconds)
+	    var duration = 700;
+	    $('#toggle').toggle(effect, options, duration);
+	});
+
+  // Digamber singh code starts.
+  $('#intro').parallax("50%", 0.1);
+  $('#second').parallax("50%", 0.1);
+  $('.bg').parallax("50%", 0.4);
+   
+  $(".scroll-down").click(function (event) {
+  event.preventDefault();
+  $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
+  });
+  // Digamber singh code ends.
+
+
+	$( "#slider-range-min" ).slider({
+	range: "min",
+	value: 37,
+	min: 1,
+	max: 700,
+	slide: function( event, ui ) {
+	$( "#amount" ).val( ui.value );
+	}
+	});
+	$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+
+
+	 $( "#datepicker" ).datepicker({
+	showOn: "button",
+	buttonImageOnly: false,
+	buttonText: "Select date"
+	});
+	
+	$( "#speed" ).selectmenu();
+
+});
+
+function drawPolyline(locations, color) {
+  var truckRouteCoordinates = [];
+  for(i =0;i<locations.length;i++)
+  { 
+    latitude = locations[i]["lat"] || locations[i].latitude
+    longitude = locations[i]["lng"] || locations[i].longitude
+    truckRouteCoordinates.push(new google.maps.LatLng(latitude, longitude));
+  }
+
+
+  var symbolTwo = {
+    path: 'M -1,0 A 1,1 0 0 0 -3,0 1,1 0 0 0 -1,0M 1,0 A 1,1 0 0 0 3,0 1,1 0 0 0 1,0M -3,3 Q 0,5 3,3',
+    strokeColor: '#00F',
+    rotation: 45
+  };
 
   var resetAllStops = function(){
     $.ajax({
@@ -174,7 +237,10 @@ function initializeMap(locations){
       }
     })
   };
+<<<<<<< HEAD
 
 
 
   
+=======
+>>>>>>> 9305fdab23d6267400e3ffa70d068578793256b3
