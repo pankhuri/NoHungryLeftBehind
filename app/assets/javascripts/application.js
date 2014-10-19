@@ -64,11 +64,11 @@ function drawPolyline(locations, color) {
   }
 
 
-  var truck = {
-    path: google.maps.SymbolPath.CIRCLE,
-    strokeColor: '#00F',
-    rotation: 45
-  };
+  // var truck = {
+  //   path: google.maps.SymbolPath.CIRCLE,
+  //   strokeColor: '#00F',
+  //   rotation: 45
+  // };
 
   var truckPath = new google.maps.Polyline({
     path: truckRouteCoordinates,
@@ -76,13 +76,13 @@ function drawPolyline(locations, color) {
     strokeColor: color,
     strokeOpacity: 2.0,
     strokeWeight: 4,
-    travelMode: google.maps.TravelMode.BICYCLING,
-    icons: [
-    {
-      icon: truck,
-      offset: '50%'
-    }
-    ]
+    travelMode: google.maps.TravelMode.BICYCLING
+    // icons: [
+    // {
+    //   icon: truck,
+    //   offset: '50%'
+    // }
+    // ]
 
   });
 

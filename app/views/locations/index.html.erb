@@ -8,49 +8,50 @@
 
 
 <script>
-var directionsDisplay = new google.maps.DirectionsRenderer();
-var directionsService = new google.maps.DirectionsService();
-var locations = <%=raw @location_hash.to_json %>;
-function calcRoute(latitude_origin,longitude_origin,latitude_destination,longitude_destination) {
-var origin = new google.maps.LatLng(latitude_origin, longitude_origin);
-var destination = new google.maps.LatLng(latitude_destination, longitude_destination);
-  var truckRouteCoordinates = [];
-  for(i =0;i<locations.length-1;i++)
-  { 
+// var directionsDisplay = new google.maps.DirectionsRenderer();
+// var directionsService = new google.maps.DirectionsService();
+// var locations = <%=raw @location_hash.to_json %>;
+// function calcRoute(latitude_origin,longitude_origin,latitude_destination,longitude_destination) {
+// var origin = new google.maps.LatLng(latitude_origin, longitude_origin);
+// var destination = new google.maps.LatLng(latitude_destination, longitude_destination);
+//   var truckRouteCoordinates = [];
+//   for(i =0;i<locations.length-1;i++)
+//   { 
   	
-    latitude = locations[i]["lat"] 
-    longitude = locations[i]["lng"] 
-    truckRouteCoordinates.push({"location": new google.maps.LatLng(latitude, longitude)});
-  }
- debugger
-// var truckRouteCoordinates = [{location: new google.maps.LatLng(28.6296, 77.0802)},
-// {location: new google.maps.LatLng(28.6331, 77.0867)}];
+//     latitude = locations[i]["lat"] 
+//     longitude = locations[i]["lng"] 
+//     truckRouteCoordinates.push({"location": new google.maps.LatLng(latitude, longitude)});
+//   }
+// // var truckRouteCoordinates = [{location: new google.maps.LatLng(28.6296, 77.0802)},
+// // {location: new google.maps.LatLng(28.6331, 77.0867)}];
 
 
-var request = {
-origin: origin,
-destination: destination,
-waypoints: truckRouteCoordinates,
-travelMode: google.maps.TravelMode.DRIVING
-};
-directionsService.route(request, function(response, status) {
-if (status == google.maps.DirectionsStatus.OK) {
-directionsDisplay.setDirections(response);
-}
-});
-}
-<%= @location_hash.each_slice(2) do |location_hash|%>
-calcRoute(<%=location_hash.first[:lat]%>,<%=location_hash.first[:lng]%>,<%=location_hash.last[:lat]%>,<%=location_hash.last[:lng]%>);
-<%end%>
-function initialize(){
-var handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
-markers = handler.addMarkers(<%=raw @location_hash.to_json %>);
-handler.bounds.extendWith(markers);
-handler.fitMapToBounds();
-directionsDisplay.setMap(handler.getMap());
-});
-}
-google.maps.event.addDomListener(window, "load", initialize);
+// var request = {
+// origin: origin,
+// destination: destination,
+// waypoints: truckRouteCoordinates,
+// travelMode: google.maps.TravelMode.DRIVING
+// };
+// directionsService.route(request, function(response, status) {
+// if (status == google.maps.DirectionsStatus.OK) {
+// directionsDisplay.setDirections(response);
+// }
+// });
+// }
+// <%= @location_hash.each_slice(2) do |location_hash|%>
+// calcRoute(<%=location_hash.first[:lat]%>,<%=location_hash.first[:lng]%>,<%=location_hash.last[:lat]%>,<%=location_hash.last[:lng]%>);
+// <%end%>
+// function initialize(){
+// var handler = Gmaps.build('Google');
+// handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
+// markers = handler.addMarkers(<%=raw @location_hash.to_json %>);
+// handler.bounds.extendWith(markers);
+// handler.fitMapToBounds();
+// directionsDisplay.setMap(handler.getMap());
+// });
+// }
+// google.maps.event.addDomListener(window, "load", initialize);
+
+google.maps.event.addDomListener(window, "load", initializeMap(<%=raw @location_hash.to_json %>));
 
 </script>
