@@ -1,4 +1,5 @@
-<%= form_for donation, :id => "donation_form" do |f| %>
+<div id="donation_form">
+<%= form_for donation do |f| %>
 	<div id="toggle" class="spread-block">
 		<div class="inner">
 		
@@ -37,10 +38,10 @@
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Location</label>
 			<div class="col-sm-8 location">
-				<%= f.select :location_id, PickUpLocation.all.collect{|location| [location.name, location.id]},:id=>"speed", :class=>"form-control"%>
+				<%= f.select :location_id, PickUpLocation.all.collect{|location|[location.name, location.id]}, {}, :id=>"speed", :class=>"form-control", :include_blank => "Select" %>
 
 			<span class="green-input"> <!-- w3c empty validate --> </span>	
-			  <small class="message"> The Happiness Truck will be there at <strong> 17:30 </strong> </small>
+			  <small class="message"> The Happiness Truck will be there for you ! </small>
 			</div>
 		  </div>
 		  
@@ -90,4 +91,5 @@
 		</div>
 	</div>	
 <% end%>
+</div>
 	

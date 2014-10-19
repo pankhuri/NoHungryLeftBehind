@@ -183,5 +183,43 @@ function initializeMap(locations){
 	    buttonText: "Select date"
 	  });
 
-	  $( "#speed" ).selectmenu();
+	  $( "#speed" ).selectmenu({
+  		change: function( event, ui ) { validate_location();}
+		});
+		validate_happiness_form();
+	}
+	
+	var validate_happiness_form = function(){
+		$("#donation_form .form-control").blur(function(){
+		if(string_empty($(this).val())){
+			$(this).parent().find(".error-msg").text("Can you please fill it for us..").show();
+			$(this).parent().find(".message").hide();
+		}
+		if($(this).attr("id") == "user_name"){
+			$(this).parent().find(".message").find("strong").text($("#user_name").val());
+		}
+			$(this).parent().find(".error-msg").hide();
+			$(this).parent().find(".message").show();
+		});
+		
+	}
+	
+	var validate_location = function(){
+		_location_element = $("#speed")
+		_location_element.parent().find(".error-msg").hide();
+		_location_element.parent().find(".message").show();
+		
+	}
+
+	var string_empty = function(str){
+	 if(str == null) {
+	   return true;
+	 } else {
+	   var txt = str.toString();
+	   if(txt.replace(/\ /g, "") == ""){
+	     return true;
+	   }else{
+	     return false;
+	   }
+	 }
 	}
