@@ -34,18 +34,38 @@ $(function () {
 
   var worker = function(){
     currentPosition = getNextLocationFromJson(currentPosition)
+    var timeoutTime = 5000;
+    if (currentPosition.pickUpLocation == "true"){
+      timeoutTime = 20000
+      updateLocation('pick_up_location', currentPosition)
+    }
+    else if (currentPosition.dropLocation == 'true'){
+      timeoutTime = 30000
+      updateLocation('drop_location', currentPosition)
+    }
     $.ajax({
       url: '/truck_locations/last',
       type: 'PUT',
-      data: currentPosition, 
+      data: {'truck_location' :currentPosition},
       success: function(data) {
-        $('.result').html(data);
+        console.log("Successfully updated")
       },
       complete: function() {
-        setTimeout(worker, 5000);
+        setTimeout(worker, timeoutTime);
       }
     });
   };
+
+  var updateLocation = function(stopType, currentPosition){
+    $.ajax({
+      url: stopType + '/update',
+      type: 'PUT',
+      data: {stopType : currentPosition},
+      success: function(data){
+        console.log("Successfully updated")
+      }
+    })
+  }
 
   var getNextLocationFromJson = function(prevPosition){
     if (latLongs.length > prevPosition.position + 1){
@@ -56,12 +76,6 @@ $(function () {
       currentPosition = latLongs[0]
       currentPosition["position"] = 0
     }
-    // for (var location = 0; location < latLongs.length; location++){
-    //   if (location.latitude == currentPosition["latitude"] && location.longitude == currentPosition["longitude"]){
-    //     currentPosition = {"latitude" : location.latitude, "longitude":location.longitude}
-    //     return false;
-    //   }
-    // }
   };
 
 
