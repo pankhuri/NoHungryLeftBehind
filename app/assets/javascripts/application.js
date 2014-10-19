@@ -53,17 +53,32 @@ $(function () {
 	
 
 });
-
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
 function drawPolyline(locations, color) {
   var truckRouteCoordinates = [];
-  for(i =0;i<locations.length;i++)
+  for(var i =0,j=i+1;i<locations.length;i++)
   { 
-    latitude = locations[i]["lat"] || locations[i].latitude
-    longitude = locations[i]["lng"] || locations[i].longitude
-    truckRouteCoordinates.push(new google.maps.LatLng(latitude, longitude));
+    latitude_1 = locations[i]["lat"] || locations[i].latitude
+    longitude_1 = locations[i]["lng"] || locations[i].longitude
+    latitude_2 = locations[j]["lat"] || locations[j].latitude
+    longitude_2 =locations[j]["lng"] || locations[j].longitude
+    var origin = new google.maps.LatLng(latitude_1, longitude_1);
+    var destination = new google.maps.LatLng(latitude_2, longitude_2);
+    
+    
+  
   }
-
-
+var request = {
+    origin: origin,
+    destination: destination,
+    travelMode: google.maps.TravelMode.DRIVING
+    };
+directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+    directionsDisplay.setDirections(response);
+    }
+    });
   // var truck = {
   //   path: google.maps.SymbolPath.CIRCLE,
   //   strokeColor: '#00F',
@@ -98,6 +113,7 @@ function initializeMap(locations){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+    directionsDisplay.setMap(handler.getMap());
     // truckPath.setMap(handler.getMap());
   });
 }
@@ -122,7 +138,8 @@ var worker = function(){
     complete: function() {
       locations = latLongs.slice(0,currentPosition.position)
       truckPath = drawPolyline(locations, 'green');
-      truckPath.setMap(handler.getMap());
+      //truckPath.setMap(handler.getMap());
+      directionsDisplay.setMap(handler.getMap());
       setTimeout(worker, timeoutTime);
     }
   });
