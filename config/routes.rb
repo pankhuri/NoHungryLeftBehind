@@ -6,6 +6,7 @@ R14Team265::Application.routes.draw do
   root 'users#index'
 
   resources :locations
+  resources :donations
 
   get "truck_locations/last" => "truck_locations#show"
 
@@ -14,6 +15,8 @@ R14Team265::Application.routes.draw do
   put "pick_up_location/update" => "pick_up_locations#update"
 
   put "drop_location/update" => "drop_locations#update"
+
+  put "locations/reset" => "locations#reset"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
