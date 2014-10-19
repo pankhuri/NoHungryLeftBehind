@@ -56,11 +56,12 @@ $(function () {
 	
 
 });
+var i,j;
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 function drawPolyline(locations, color) {
   var truckRouteCoordinates = [];
-  for(var i =0,j=i+1;i<locations.length;i++)
+  for(i =0, j=i+1;i<locations.length;i++)
   { 
     latitude_1 = locations[i]["lat"] || locations[i].latitude
     longitude_1 = locations[i]["lng"] || locations[i].longitude
