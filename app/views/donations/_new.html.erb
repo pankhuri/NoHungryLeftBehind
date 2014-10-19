@@ -1,4 +1,4 @@
-<%= form_for donation do |f| %>
+<%= form_for donation, :id => "donation_form" do |f| %>
 	<div id="toggle" class="spread-block">
 		<div class="inner">
 		
@@ -11,8 +11,8 @@
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Name</label>
 			<div class="col-sm-8">
-				<%= text_field_tag "[donation][user][name]", "", :class => "form-control" %>
-    			  <small class="message"> Nice to meet you <strong> Pankhuri! </strong> </small>
+				<%= text_field_tag "[donation][user][name]", "", :class => "form-control", :id => "user_name" %>
+    			  <small class="message"> Nice to meet you <strong> ##name## </strong> </small>
 			  <small class="error-msg"> Show your error msg here. </small>
 			</div>
 		  </div>
@@ -28,7 +28,7 @@
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Date</label>
 			<div class="col-sm-8 date-block">
-				<%#= f.text_field :picked_at, :id=>"datepicker",:class=>"form-control"%>
+				<%= f.text_field :picked_at, :id=>"datepicker",:class=>"form-control"%>
 			  <span class="green-light"> <!-- w3c empty div validate --> </span>
 			   <small class="message"> So, shall we call it a date? </small>
 			</div>
