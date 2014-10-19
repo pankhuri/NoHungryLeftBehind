@@ -26,7 +26,7 @@
   end
   
   def full_address
-    name + " " + "#{city}"
+    name.concat(" #{city}")
   end
 
   def full_address_changed?
