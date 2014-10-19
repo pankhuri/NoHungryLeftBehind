@@ -24,6 +24,7 @@
 
 var handler = Gmaps.build('Google');
 var truckPath;
+var marker;
 
   $.get('truck_locations/last', function(data){
     currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
@@ -64,7 +65,8 @@ function drawPolyline(locations, color) {
   { 
     latitude = locations[i]["lat"] || locations[i].latitude
     longitude = locations[i]["lng"] || locations[i].longitude
-    truckRouteCoordinates.push(new google.maps.LatLng(latitude, longitude));
+    position = new google.maps.LatLng(latitude, longitude)
+    truckRouteCoordinates.push(position);
   }
 var request = {
     origin: origin,
@@ -96,6 +98,17 @@ directionsService.route(request, function(response, status) {
     // }
     // ]
 
+  });
+
+  if (marker){
+    marker.setMap(null);
+    }
+
+  var iconBase = '/assets/map-truck.png';
+  marker = new google.maps.Marker({
+    position: position,
+    map: handler.getMap(),
+    icon: iconBase
   });
 
   return truckPath
