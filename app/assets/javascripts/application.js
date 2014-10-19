@@ -77,6 +77,19 @@ function initializeMap(locations){
     handler.fitMapToBounds();
     truckPath.setMap(handler.getMap());
   });
+
+  setTimeout(initializeMapOptions, 5000);
+}
+
+var initializeMapOptions = function(){
+  var myOptions = {
+                      zoom:11,
+                      center: new google.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
+                      mapTypeId: google.maps.MapTypeId.ROADMAP,
+                      panControl: false
+                  };
+
+  handler.getMap().set(myOptions);  
 }
 
 var worker = function(){
