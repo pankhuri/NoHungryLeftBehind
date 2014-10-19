@@ -78,28 +78,16 @@ function initializeMap(locations){
     truckPath.setMap(handler.getMap());
   });
 
-  setTimeout(initializeMapOptions, 5000);
-}
-
-var initializeMapOptions = function(){
-  var myOptions = {
-                      zoom:11,
-                      center: new google.maps.LatLng(currentPosition.latitude, currentPosition.longitude),
-                      mapTypeId: google.maps.MapTypeId.ROADMAP,
-                      panControl: false
-                  };
-
-  handler.getMap().set(myOptions);  
 }
 
 var worker = function(){
   currentPosition = getNextLocationFromJson(currentPosition)
   var timeoutTime = 2000;
-  if (currentPosition.pickUpLocation == true){
+  if (currentPosition.PickUpLocation == true){
     timeoutTime = 20000
     updateLocation('pick_up_location', currentPosition)
   }
-  else if (currentPosition.dropLocation == true){
+  else if (currentPosition.DropLocation == true){
     timeoutTime = 30000
     updateLocation('drop_location', currentPosition)
   }
@@ -122,10 +110,12 @@ var worker = function(){
 };
 
 var updateLocation = function(stopType, currentPosition){
+  var locationObject = {};
+  locationObject[stopType] = currentPosition
   $.ajax({
-    url: stopType + '/update',
+    url: '/' + stopType + '/update',
     type: 'PUT',
-    data: {stopType : currentPosition},
+    data: locationObject,
     success: function(data){
       console.log("Successfully updated")
     }
@@ -265,7 +255,7 @@ var string_empty = function(str){
 }
 
 var verifyLocationChanged = function(){
-  var indicatorIcon =  $(".indicator-icon").first()
+  var indicatorIcon =  $(".indicator-icon").not("indicator-icon-active-green").first()
   var locationId = indicatorIcon.parents('.indicator').find("#location_id_").val()
   $.ajax({
     url: '/location/locationId',
@@ -273,7 +263,6 @@ var verifyLocationChanged = function(){
     success: function(location) {
       if (location.is_passed){
         indicatorIcon.addClass("indicator-icon-active-green")
-        indicatorIcon.removeClass("indicator-icon")
       }
       setTimeout(verifyLocationChanged, 10000);
     }
