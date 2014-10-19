@@ -71,7 +71,7 @@ function drawPolyline(locations, color) {
 function initializeMap(locations){
   getCurrentPosition();
   setTimeout(worker, 1000);
-  handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
+  handler.buildMap({ provider: {center: google.maps.LatLng(28.6473, 77.2028)}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
@@ -153,6 +153,7 @@ var happiness_form = function(){
     max: 35,
     change: function( event, ui ) {
      $( "#amount" ).val( ui.value );
+		 
    }
  });
 
