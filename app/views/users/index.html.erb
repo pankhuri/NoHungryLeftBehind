@@ -10,7 +10,7 @@
 	<a class="navbar-brand" href="/"> <%= image_tag("logo.png") %> </a>
 	</div>
 	<div class="navbar-right">
-	<a href="#" class="red-button open-close"> Donate &nbsp;&nbsp; leftovers </a>
+	<a href="javascript:void(0)" class="red-button open-close"> Donate &nbsp;&nbsp; leftovers </a>
 	<a href="/locations" class="green-button"> Locate &nbsp;&nbsp;The&nbsp;&nbsp; Happiness &nbsp;&nbsp;Truck </a>
 	</div>
 	</div><!-- /.navbar-collapse -->
@@ -50,7 +50,7 @@
 	
 	
 	<!-- spread happiness starts -->
-	<%= render :partial => "donations/new", :locals => {:donation => Donation.new} %>
+	<%= render :partial => "donations/new", :locals => {:donation => @donation} %>
 	<!-- spread happiness ends -->
 	
 	
