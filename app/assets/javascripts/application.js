@@ -25,37 +25,17 @@
 var handler = Gmaps.build('Google');
 var truckPath;
 var marker;
+var currentPosition;
 
-$.get('truck_locations/last', function(data){
-  currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
-  locations = latLongs.slice(0,currentPosition.position)
-  drawPolyline(locations, 'green')
-});
 
-$(function () {
-	
-	$("#rumble2014").css({"width":"auto", "padding": "10px 25px", "font-family": "Oswald', sans-serif"});
-	$("#rumble2014 a").css({"font-weight": "normal", "font-family": "Oswald', sans-serif"});
-	
-  $(".scroll-down").click(function (event) {
-    event.preventDefault();
-    $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
+var getCurrentPosition = function(){
+  $.get('truck_locations/last', function(data){
+    currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
+    locations = latLongs.slice(0,currentPosition.position)
+    drawPolyline(locations, 'green')
   });
-
-  $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
-
-  $(document).on('click', '.close-spread, .open-close', function(){
-    // Set the effect type
-    var effect = 'slide';
-    // Set the options for the effect type chosen
-    var options = { direction: 'right' };
-    // Set the duration (default: 400 milliseconds)
-    var duration = 700;
-    $('#toggle').toggle(effect, options, duration);
-  });
-
-  happiness_form();
-});
+  
+}
 
 function drawPolyline(locations, color) {
   var truckRouteCoordinates = [];
@@ -89,6 +69,7 @@ function drawPolyline(locations, color) {
 }
 
 function initializeMap(locations){
+  getCurrentPosition();
   setTimeout(worker, 1000);
   handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);
@@ -175,7 +156,7 @@ var happiness_form = function(){
    }
  });
 
-	//$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+  //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
 
   $( "#datepicker" ).datepicker({
     showOn: "button",
@@ -227,7 +208,7 @@ var validate_all_fields = function(){
   }
   else{
     validate = true
-  }			
+  }     
   return validate
 
 }
@@ -251,3 +232,46 @@ var string_empty = function(str){
     }
   }
 }
+
+var verifyLocationChanged = function(){
+  var indicatorIcon =  $(".indicator-icon").first()
+  var locationId = indicatorIcon.parents('.indicator').find("#location_id_").val()
+  $.ajax({
+    url: '/location/locationId',
+    type: 'GET',
+    success: function(location) {
+      if (location.is_passed){
+        indicatorIcon.addClass("indicator-icon-active-green")
+        indicatorIcon.removeClass("indicator-icon")
+      }
+      setTimeout(verifyLocationChanged, 10000);
+    }
+  });  
+}
+
+$(function () {
+  
+  $("#rumble2014").css({"width":"auto", "padding": "10px 25px", "font-family": "Oswald', sans-serif"});
+  $("#rumble2014 a").css({"font-weight": "normal", "font-family": "Oswald', sans-serif"});
+  
+  $(".scroll-down").click(function (event) {
+    event.preventDefault();
+    $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
+  });
+
+  $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
+
+  $(document).on('click', '.close-spread, .open-close', function(){
+    // Set the effect type
+    var effect = 'slide';
+    // Set the options for the effect type chosen
+    var options = { direction: 'right' };
+    // Set the duration (default: 400 milliseconds)
+    var duration = 700;
+    $('#toggle').toggle(effect, options, duration);
+  });
+
+  happiness_form();
+
+});
+

@@ -2,6 +2,7 @@ class DonationsController < ApplicationController
   
 	def new
 		@donation = Donation.new
+		@locations = Location.stop_locations
 	end
   
 	def create

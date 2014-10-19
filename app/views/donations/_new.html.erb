@@ -76,10 +76,12 @@
 		<span class="top"> <!-- w3c empty div validate --> </span>
 		<span class="bottom"> <!-- w3c empty div validate --> </span>
 		
-		<% Location.all.each do |location| %>
+		<% @locations.each do |location| %>
 			<div class="indicator"> 
-				<h4 class="location-title"> <%= location.name %> </h4> 
-				<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
+				<%= hidden_field_tag("location_id[]", location.id) %>
+				<h4 class="location-title"> <%= location.name %> </h4>
+				<i class=<%= indicator_icon(location) %>>
+				 <!-- w3c empty div validate --> </i> 
 			</div>
 		<% end %>
 		
