@@ -71,14 +71,12 @@ function drawPolyline(locations, color) {
 function initializeMap(locations){
   getCurrentPosition();
   setTimeout(worker, 1000);
-	var mapOptions = {
-	  center: new google.maps.LatLng(28.6527, 77.1316),
-	  zoom: 8
-	};
-  handler.buildMap({ provider: mapOptions, internal: {id: 'feed_map'}}, function(){
+  handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
+    handler.map.centerOn([28.6578, 77.1425]);
+    handler.getMap().setZoom(13)
+    // handler.fitMapToBounds();
     truckPath.setMap(handler.getMap());
   });
 
