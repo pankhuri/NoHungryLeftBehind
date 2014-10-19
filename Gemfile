@@ -44,6 +44,7 @@ group :doc do
 end
 
 gem 'underscore-rails'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'unicorn'

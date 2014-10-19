@@ -16,6 +16,8 @@
 //= require underscore
 //= require gmaps/google
 //= require twitter/bootstrap
+//= require jquery-ui
+//= require jquery.backgroundSize
 //= require_tree .
 
 $(function () {
@@ -63,7 +65,39 @@ $(function () {
     //   }
     // }
   };
+	
+	$(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
+ 
+	$('.close-spread, .open-close').click(function () {
+	    // Set the effect type
+	    var effect = 'slide';
+	    // Set the options for the effect type chosen
+	    var options = { direction: 'right' };
+	    // Set the duration (default: 400 milliseconds)
+	    var duration = 700;
+	    $('#toggle').toggle(effect, options, duration);
+	});
 
+
+	$( "#slider-range-min" ).slider({
+	range: "min",
+	value: 37,
+	min: 1,
+	max: 700,
+	slide: function( event, ui ) {
+	$( "#amount" ).val( ui.value );
+	}
+	});
+	$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+
+
+	 $( "#datepicker" ).datepicker({
+	showOn: "button",
+	buttonImageOnly: false,
+	buttonText: "Select date"
+	});
+	
+	$( "#speed" ).selectmenu();
 
 });
 var directionsDisplay = new google.maps.DirectionsRenderer();
