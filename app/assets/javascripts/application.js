@@ -30,69 +30,6 @@ $(function () {
     drawPolyline(locations, 'green')
   });
 
-  var worker = function(){
-    currentPosition = getNextLocationFromJson(currentPosition)
-    var timeoutTime = 2000;
-    if (currentPosition.pickUpLocation == true){
-      timeoutTime = 20000
-      updateLocation('pick_up_location', currentPosition)
-    }
-    else if (currentPosition.dropLocation == true){
-      timeoutTime = 30000
-      updateLocation('drop_location', currentPosition)
-    }
-    $.ajax({
-      url: '/truck_locations/last',
-      type: 'PUT',
-      data: {'truck_location' :currentPosition},
-      success: function(data) {
-        console.log("Successfully updated")
-      },
-      complete: function() {
-        setTimeout(worker, timeoutTime);
-      }
-    });
-    locations = latLongs.slice(0,currentPosition.position)
-    truckPath = drawPolyline(locations, 'green');
-    truckPath.setMap(handler.getMap());
-
-  };
-
-  setTimeout(worker, 2000);
-
-  var updateLocation = function(stopType, currentPosition){
-    $.ajax({
-      url: stopType + '/update',
-      type: 'PUT',
-      data: {stopType : currentPosition},
-      success: function(data){
-        console.log("Successfully updated")
-      }
-    })
-  }
-
-  var getNextLocationFromJson = function(prevPosition){
-    if (latLongs.length > prevPosition.position + 1){
-      currentPosition = latLongs[prevPosition.position + 1]
-      currentPosition["position"] = prevPosition.position + 1
-    }
-    else{
-      currentPosition = latLongs[0]
-      currentPosition["position"] = 0
-      resetAllStops();
-    }
-    return currentPosition
-  };
-
-  var resetAllStops = function(){
-    $.ajax({
-      url: 'location/reset',
-      type: 'PUT',
-      success: function(data){
-        console.log("Successfully updated")
-      }
-    })
-  };
 
   $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
 
@@ -145,23 +82,13 @@ function drawPolyline(locations, color) {
     rotation: 45
   };
 
-  var truckRouteCoordinates = [];
-  for(i =0;i<locations.length;i++)
-  { 
-    truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
-  }
-  var mapOptions = {
-    zoom: 3,
-    center: new google.maps.LatLng(0, -180),
-    mapTypeId: google.maps.MapTypeId.DRIVING
-  };
-
   var truckPath = new google.maps.Polyline({
     path: truckRouteCoordinates,
     geodesic: true,
     strokeColor: color,
     strokeOpacity: 2.0,
     strokeWeight: 4,
+    travelMode: google.maps.TravelMode.BICYCLING,
     icons: [
     {
       icon: symbolTwo,
@@ -175,9 +102,8 @@ function drawPolyline(locations, color) {
 
 }
 
-function initializeMap(locations)
-{
-
+function initializeMap(locations){
+  setTimeout(worker, 1000);
   truckPath = drawPolyline(locations, 'red')
 
   handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
@@ -187,3 +113,64 @@ function initializeMap(locations)
     truckPath.setMap(handler.getMap());
   });
 }
+  var worker = function(){
+    currentPosition = getNextLocationFromJson(currentPosition)
+    var timeoutTime = 2000;
+    if (currentPosition.pickUpLocation == true){
+      timeoutTime = 20000
+      updateLocation('pick_up_location', currentPosition)
+    }
+    else if (currentPosition.dropLocation == true){
+      timeoutTime = 30000
+      updateLocation('drop_location', currentPosition)
+    }
+    $.ajax({
+      url: '/truck_locations/last',
+      type: 'PUT',
+      data: {'truck_location' :currentPosition},
+      success: function(data) {
+        console.log("Successfully updated")
+      },
+      complete: function() {
+        setTimeout(worker, timeoutTime);
+      }
+    });
+    locations = latLongs.slice(0,currentPosition.position)
+    truckPath = drawPolyline(locations, 'green');
+    truckPath.setMap(handler.getMap());
+
+  };
+
+  var updateLocation = function(stopType, currentPosition){
+    $.ajax({
+      url: stopType + '/update',
+      type: 'PUT',
+      data: {stopType : currentPosition},
+      success: function(data){
+        console.log("Successfully updated")
+      }
+    })
+  }
+
+  var getNextLocationFromJson = function(prevPosition){
+    if (latLongs.length > prevPosition.position + 1){
+      currentPosition = latLongs[prevPosition.position + 1]
+      currentPosition["position"] = prevPosition.position + 1
+    }
+    else{
+      currentPosition = latLongs[0]
+      currentPosition["position"] = 0
+      resetAllStops();
+    }
+    return currentPosition
+  };
+
+  var resetAllStops = function(){
+    $.ajax({
+      url: 'locations/reset',
+      type: 'PUT',
+      success: function(data){
+        console.log("Successfully updated")
+      }
+    })
+  };
