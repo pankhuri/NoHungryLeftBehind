@@ -1,4 +1,4 @@
-[{"latitude":28.6218,"longitude":77.0558,"PickUpLocation":true},
+var latLongs = [{"latitude":28.6218,"longitude":77.0558,"PickUpLocation":true},
 {"latitude":28.6317246,"longitude":77.08255559999999},
 {"latitude":28.6304055,"longitude":77.0797959},
 {"latitude":28.6296,"longitude":77.0802,"PickUpLocation":true},

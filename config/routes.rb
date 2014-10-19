@@ -6,6 +6,7 @@ R14Team265::Application.routes.draw do
   root 'users#index'
 
   resources :locations
+  resources :donations
 
   get "truck_locations/last" => "truck_locations#show"
 
