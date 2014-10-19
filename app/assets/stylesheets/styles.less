@@ -15,12 +15,12 @@
 
 @font-face {
     font-family: 'bebasregular';
-    src: url('css/fonts/bebas___-webfont.eot');
-    src: url('css/fonts/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('css/fonts/bebas___-webfont.woff2') format('woff2'),
-         url('css/fonts/bebas___-webfont.woff') format('woff'),
-         url('css/fonts/bebas___-webfont.ttf') format('truetype'),
-         url('css/fonts/bebas___-webfont.svg#bebasregular') format('svg');
+    src: url('fonts/bebas___-webfont.eot');
+    src: url('fonts/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bebas___-webfont.woff2') format('woff2'),
+         url('fonts/bebas___-webfont.woff') format('woff'),
+         url('fonts/bebas___-webfont.ttf') format('truetype'),
+         url('fonts/bebas___-webfont.svg#bebasregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -150,7 +150,7 @@ color:@white;
 display: inline-block;
 font-size: 21px;
 line-height: normal;
-padding:19px 35px 10px;
+padding:10px 35px;
 }
 body a.red-button:hover,
 .red-button:hover {
@@ -168,7 +168,7 @@ color:@white;
 display: inline-block;
 font-size: 21px;
 line-height: normal;
-padding: 19px 35px 10px;
+padding: 10px 35px;
 }
 body a.green-button:hover,
 .green-button:hover {
@@ -292,8 +292,9 @@ video {
 
 
 .header-outer { 
-	background:image-url('main-background.jpg') no-repeat 0 0;
+	background:url('main-background.jpg') no-repeat 0 0;
 	position:relative;
+	padding-bottom: 15px;
 	
 	.navbar-brand {
 		height: 131px;
@@ -318,10 +319,10 @@ video {
 	}
 	
 	.title-main {
-	   padding: 70px 0 52px;
+	   padding: 10px 0 35px;
 	   
 		h1 {
-			font-size:57px;
+			font-size:48px;
 			color:@white;
 			text-align:center;
 			font-family: 'bebasregular';
@@ -334,16 +335,16 @@ video {
 		img { 
 			display: block;
 			margin: 0 auto;
-			width: 401px;
-			margin-bottom:48px;
+			width: 274px;
+			margin-bottom:30px;
 		}
 		h2 {
 			color: #ffffff;
-			font-size: 47px;
+			font-size: 35px;
 			font-weight: 100;
-			padding: 0 118px 57px;
+			padding: 0 235px 32px;
 			text-align: center;
-			line-height:56px;
+			line-height:46px;
 			font-family: 'Roboto', sans-serif;
 		}
 	}
@@ -352,7 +353,7 @@ video {
 
 /**** Scroll down button common  ****/
 .scroll-down { 
-    margin:0 auto 35px;
+    margin:0 auto;
 	display:block;
 	width:50px;
 	height:52px;
@@ -457,7 +458,7 @@ overflow-y: auto;
 			font-weight: inherit;
 			line-height: normal;
 			margin: 0 0 0 7%;
-			padding: 16px 0 7px;
+			padding: 8px 0 9px;
 			width: 80%;
 			word-spacing: 5px;
 			&:hover {
@@ -688,19 +689,40 @@ overflow-y: auto;
 }
 /*##### spread form css ends ######*/
 
-.panel1 {
-background:image-url('panel-1.jpg') no-repeat 0 0;
-min-height:796px;
+
+
+
+
+
+/* paralax starts */
+#header, #intro, #second{
+	width: 100%;
 }
-.panel2 {
-background:image-url('panel-2.jpg') no-repeat 0 0;
-min-height:796px;
-}
-.panel3 {
-background:image-url('panel-3.jpg') no-repeat 0 0;
-min-height:796px;
+#intro{
+	background:#ffdd89 url('panel-1.jpg') 50% 0 no-repeat fixed;
+	background-size:cover;
+	height: 850px;
 }
 
+#second{
+	background:#79a7a4 url('panel-2.jpg') 50% 0 no-repeat fixed;
+	background-size:cover;
+	height: 1050px;
+	overflow: hidden;
+}
+#third{
+	background:#8ed4da url('panel-3.jpg') 50% 0 no-repeat fixed;
+	background-size:cover;
+	height: 700px;
+}
+
+#fourth {
+	background:#79a7a4 url('panel-4.jpg') 50% 0 no-repeat fixed;
+	background-size:cover;
+	height: 1050px;
+	overflow: hidden;
+}
+/* paralax ends */
 
 
 
@@ -708,7 +730,34 @@ min-height:796px;
 
 
 
+/* paralax starts */
 
+@media(min-width:1651px) and (max-width:1950px){
+
+.header-outer .title-main h1 {
+    font-size: 57px;
+}
+.header-outer .title-main {
+    padding: 70px 0 52px;
+}
+.header-outer .banner img {
+    margin: 0 auto 48px;
+    width: 401px;
+}
+.header-outer .banner h2 {
+    font-size: 47px;
+    line-height: 56px;
+    padding: 0 118px 57px;
+}
+
+}
+
+
+@media(min-width:1400px) and (max-width:1650px){ 
+.header-outer .title-main {
+    padding: 33px 0 65px;
+}
+}
 
 
 @media(max-width:1200px) {
@@ -793,8 +842,4 @@ font-size: 14px;
 }
 
 
-
-
-
-
-
+/* paralax ends */
