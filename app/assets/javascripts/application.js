@@ -39,7 +39,7 @@ $(function () {
 	
   $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
 
-  $('.close-spread, .open-close').click(function () {
+  $(document).on('click', '.close-spread, .open-close', function(){
    // Set the effect type
    var effect = 'slide';
    // Set the options for the effect type chosen
@@ -175,12 +175,16 @@ var resetAllStops = function(){
 	    }
 	  });
 
-	  $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+	  //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
 
 	  $( "#datepicker" ).datepicker({
 	    showOn: "button",
 	    buttonImageOnly: false,
-	    buttonText: "Select date"
+	    buttonText: "Select date",
+			onSelect:
+						function(dateText, inst){
+							$(this).parent().find(".message").show();
+						}
 	  });
 
 	  $( "#speed" ).selectmenu({
@@ -192,16 +196,39 @@ var resetAllStops = function(){
 	var validate_happiness_form = function(){
 		$("#donation_form .form-control").blur(function(){
 		if(string_empty($(this).val())){
-			$(this).parent().find(".error-msg").text("Can you please fill it for us..").show();
+			$(this).parent().find(".error-msg").text("Can you please fill it for us").show();
 			$(this).parent().find(".message").hide();
-		}
-		if($(this).attr("id") == "user_name"){
-			$(this).parent().find(".message").find("strong").text($("#user_name").val());
-		}
+		}else{
+			
+			if($(this).attr("id") == "user_name"){
+				$(this).parent().find(".message strong").text($("#user_name").val());
+			}
+			
 			$(this).parent().find(".error-msg").hide();
 			$(this).parent().find(".message").show();
+		}
+			
 		});
 		
+	}
+	
+	var validate_all_fields = function(){
+		var validate = false;
+		  if(string_empty($("#user_name").val())){
+		  	validate =  false;
+				$("#user_name").parent().find(".error-msg").text("Can you please fill it for us").show();
+				$("#user_name").parent().find(".message").hide();
+		  }
+			else if(parseInt($("#amount").val()) <= 0){
+				validate =  false;
+				$("#amount").parent().find(".error-msg").show();
+				$("#amount").parent().find(".message").hide();
+			}
+			else{
+		  	validate = true
+		  }			
+			return validate
+
 	}
 	
 	var validate_location = function(){
