@@ -22,8 +22,17 @@ class LocationsController < ApplicationController
 
   def update
     @locations = Location.stop_locations
-    @locations.update_all(is_passed: true)
+    @locations.update_all(is_passed: false)
     render json: @locations    
+  end
+
+  def show
+    @location = Location.find(location_params[:id])
+    render json: @location
+  end
+
+  def location_params
+    params.require(:location_params).permit(:id, :name, :position, :latitude, :longitude, :city)
   end
   
 end

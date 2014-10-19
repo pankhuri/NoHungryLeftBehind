@@ -2,16 +2,25 @@ class DonationsController < ApplicationController
   
 	def new
 		@donation = Donation.new
+		@locations = Location.stop_locations
 	end
   
 	def create
     user_params = params[:donation][:user]
+    picked_at = donation_params[:picked_at]
+    donation_params.delete(:picked_at)
 		@donation = Donation.new(donation_params)
+    @donation.picked_at = formatted_picked_at(picked_at)
     @donation.set_user(user_params)
     @donation.save
-		flash[:notice] = "Great! Truck will you reach you around #{@donation.picked_at} at ahaaa "
+		flash[:notice] = "Great! Truck will you reach you soon "
 		redirect_to locations_path
 	end
+  
+  def formatted_picked_at(picked_at)
+    format_str = "%m/%d/" + (picked_at =~ /\d{4}/ ? "%Y" : "%y")
+    Date.parse(picked_at) rescue Date.strptime(picked_at, format_str)
+  end
   
   
   private
