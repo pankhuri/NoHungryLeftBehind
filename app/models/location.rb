@@ -16,9 +16,6 @@ class Location < ActiveRecord::Base
 
   def self.route_steps(origin, destination)
     result = fetch_route_from_google("driving", origin, destination)
-    # if result.size < 8
-#       result = fetch_route_from_google("walking", origin, destination)
-#     end
     return result.collect{|step| step["end_location"]}
   end
   
@@ -29,7 +26,7 @@ class Location < ActiveRecord::Base
   end
   
   def full_address
-    name.concat(" #{city}")
+    name + " " + "#{city}"
   end
 
   def full_address_changed?

@@ -11,20 +11,7 @@
   background: #cc6060; /* Gecko Browsers */
 }
 
-/*############# Font face declared starts #############*/
-
-@font-face {
-    font-family: 'bebasregular';
-    src: url('fonts/bebas___-webfont.eot');
-    src: url('fonts/bebas___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/bebas___-webfont.woff2') format('woff2'),
-         url('fonts/bebas___-webfont.woff') format('woff'),
-         url('fonts/bebas___-webfont.ttf') format('truetype'),
-         url('fonts/bebas___-webfont.svg#bebasregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
+ 
 
 /*############# Font face declared starts #############*/
 
@@ -40,13 +27,7 @@
 
  
 
-.rounded(@radius: 5px) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-
-.nav-rounded(@radius: 23px) {
+.nav-rounded(@radius: 30px) {
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
     border-radius: @radius;
@@ -150,7 +131,9 @@ color:@white;
 display: inline-block;
 font-size: 21px;
 line-height: normal;
-padding:10px 35px;
+padding: 10px 35px 11px;
+text-transform: uppercase;
+font-weight: 700;
 }
 body a.red-button:hover,
 .red-button:hover {
@@ -168,7 +151,9 @@ color:@white;
 display: inline-block;
 font-size: 21px;
 line-height: normal;
-padding: 10px 35px;
+padding: 10px 35px 11px;
+text-transform: uppercase;
+font-weight: 700;
 }
 body a.green-button:hover,
 .green-button:hover {
@@ -209,7 +194,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
     line-height: normal;
-    font-family: "bebasregular";
+    font-family: 'Oswald', sans-serif;
 	color:inherit;
 }
 
@@ -218,7 +203,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, input, textarea, submit, button, small, stro
     border: none;
     outline: 0;
     text-align: inherit;
-	font-family: "bebasregular";
+	font-family: 'Oswald', sans-serif;
     color: inherit;
     .zero-mg-pd;
 	-webkit-font-smoothing: subpixel-antialiased; 
@@ -279,14 +264,6 @@ img {
     border: 0;
 }
 
-video {
-    display: block;
-    margin: 0 auto;
-    min-height: 100%;
-    min-width: 100%;
-    position: relative;
-    z-index: 0;
-}
 
 /*############## top navigation css starts ################*/
 
@@ -319,15 +296,14 @@ video {
 	}
 	
 	.title-main {
-	   padding: 10px 0 35px;
+	   padding: 0 0 30px;
 	   
 		h1 {
 			font-size:48px;
 			color:@white;
 			text-align:center;
-			font-family: 'bebasregular';
 			text-shadow: 1px 3px 2px #000000;	
-			word-spacing: 8px;
+			text-transform: uppercase;
 		}
 	}
 	
@@ -357,7 +333,7 @@ video {
 	display:block;
 	width:50px;
 	height:52px;
-	background:image-url('sprite.png') no-repeat -13px -5px;
+	background:url(sprite.png) no-repeat -13px -5px;
 	cursor:pointer;
 }
 
@@ -725,6 +701,47 @@ overflow-y: auto;
 /* paralax ends */
 
 
+
+/* join happiness starts */
+.join-happiness {
+background:#556270;
+padding:95px 0;
+text-align:center;
+
+     h2 {
+			font-size:60px;
+			color:@white;
+			text-align:center;
+			text-shadow: 1px 3px 2px #000000;	
+			word-spacing: 8px;
+			text-transform:uppercase;
+			padding-bottom: 20px;
+		}
+
+		a.red-button,
+		.red-button {
+			background:@red;
+			.boxShadow-none-btn;
+			border: 1px solid #9f4040;
+			-webkit-border-radius: 50px;
+			-moz-border-radius: 50px;
+			border-radius: 50px;
+			color: #ffffff;
+			display: inline-block;
+			font-size: 30px;
+			line-height: normal;
+			padding: 15px 108px 15px;
+			word-spacing: 5px;
+		}
+		body a.red-button:hover,
+		.red-button:hover {
+		.hover;
+		background:@red-lighten;
+		}
+
+
+}
+/* join happiness ends */
 
 
 

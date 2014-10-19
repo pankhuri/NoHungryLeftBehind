@@ -26,11 +26,11 @@ var handler = Gmaps.build('Google');
 
 $(function () {
 	
-	$(".scroll-down").click(function (event) {
-	  event.preventDefault();
-	  $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
-	  });
-	
+  $(".scroll-down").click(function (event) {
+   event.preventDefault();
+   $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
+   });
+ 
   $.get('truck_locations/last', function(data){
     currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
     locations = latLongs.slice(0,currentPosition.position)
@@ -185,5 +185,3 @@ function initializeMap(locations){
 
 	  $( "#speed" ).selectmenu();
 	}
-	
-	
