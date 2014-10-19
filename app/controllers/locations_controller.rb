@@ -5,8 +5,13 @@ class LocationsController < ApplicationController
     @location_hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
+      if location.type == 'DropLocation'
+        image_url = "/assets/yellow_icon.png"
+      else
+        image_url = "/assets/red_icon.png"
+      end
       marker.picture({
-                  :url => "/assets/red_icon.png",
+                  :url => image_url,
                   :width   => 32,
                   :height  => 32
                   })
