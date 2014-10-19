@@ -14,7 +14,7 @@
 			<div class="col-sm-8">
 				<%= text_field_tag "[donation][user][name]", "", :class => "form-control", :id => "user_name" %>
     			  <small class="message"> Nice to meet you <strong> ##name## </strong> </small>
-			  <small class="error-msg"> Show your error msg here. </small>
+			  <small class="error-msg"> Uh. please let us know your name </small>
 			</div>
 		  </div>
 		  
@@ -45,22 +45,23 @@
 			</div>
 		  </div>
 		  
-		  <div class="form-group">
+		  <div class="form-group feeds-gapping">
 			<label class="col-sm-4 control-label">feeds</label>
 			<div class="col-sm-8 feeds">
 			<div class="slider-block">
 			  <div id="slider-range-min"> <!-- w3c empty div validate --> </div>
 			  <%= image_tag("count.png") %>
 			 </div> 
-			 <%= f.hidden_field :feed_how_many, :id => "amount"%>
+			 <%= f.hidden_field :feed_how_many, :id => "amount", :value => "0" %>
 			  <span class="smiley-face"> <!-- w3c empty div validate --> </span> 
+				<small class="error-msg"> Feeds how many ? </small>
 			</div>
 		  </div>
 		  
 		  
 		  <div class="form-group">
 			<div class="col-sm-12">
-				<%= f.submit "spread happiness", :class => "btn" %>
+				<%= f.submit "Spread Happiness", :class => "btn", :onclick => "return validate_all_fields()" %>
 			</div>
 		  </div>
 		</form>
