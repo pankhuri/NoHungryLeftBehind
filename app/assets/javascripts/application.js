@@ -65,7 +65,7 @@ function drawPolyline(locations, color) {
 
 
   var truck = {
-    path: 'M -1,0 A 1,1 0 0 0 -3,0 1,1 0 0 0 -1,0M 1,0 A 1,1 0 0 0 3,0 1,1 0 0 0 1,0M -3,3 Q 0,5 3,3',
+    path: google.maps.SymbolPath.CIRCLE,
     strokeColor: '#00F',
     rotation: 45
   };
@@ -92,76 +92,76 @@ function drawPolyline(locations, color) {
 
 function initializeMap(locations){
   setTimeout(worker, 1000);
-  truckPath = drawPolyline(locations, 'red')
+  // truckPath = drawPolyline(latLongs, 'red')
 
   handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    truckPath.setMap(handler.getMap());
+    // truckPath.setMap(handler.getMap());
   });
 }
-  var worker = function(){
-    currentPosition = getNextLocationFromJson(currentPosition)
-    var timeoutTime = 2000;
-    if (currentPosition.pickUpLocation == true){
-      timeoutTime = 20000
-      updateLocation('pick_up_location', currentPosition)
-    }
-    else if (currentPosition.dropLocation == true){
-      timeoutTime = 30000
-      updateLocation('drop_location', currentPosition)
-    }
-    $.ajax({
-      url: '/truck_locations/last',
-      type: 'PUT',
-      data: {'truck_location' :currentPosition},
-      success: function(data) {
-        console.log("Successfully updated")
-      },
-      complete: function() {
-        setTimeout(worker, timeoutTime);
-      }
-    });
-    locations = latLongs.slice(0,currentPosition.position)
-    truckPath = drawPolyline(locations, 'green');
-    truckPath.setMap(handler.getMap());
-
-  };
-
-  var updateLocation = function(stopType, currentPosition){
-    $.ajax({
-      url: stopType + '/update',
-      type: 'PUT',
-      data: {stopType : currentPosition},
-      success: function(data){
-        console.log("Successfully updated")
-      }
-    })
+var worker = function(){
+  currentPosition = getNextLocationFromJson(currentPosition)
+  var timeoutTime = 2000;
+  if (currentPosition.pickUpLocation == true){
+    timeoutTime = 20000
+    updateLocation('pick_up_location', currentPosition)
   }
-
-  var getNextLocationFromJson = function(prevPosition){
-    if (latLongs.length > prevPosition.position + 1){
-      currentPosition = latLongs[prevPosition.position + 1]
-      currentPosition["position"] = prevPosition.position + 1
+  else if (currentPosition.dropLocation == true){
+    timeoutTime = 30000
+    updateLocation('drop_location', currentPosition)
+  }
+  $.ajax({
+    url: '/truck_locations/last',
+    type: 'PUT',
+    data: {'truck_location' :currentPosition},
+    success: function(data) {
+      console.log("Successfully updated")
+    },
+    complete: function() {
+      locations = latLongs.slice(0,currentPosition.position)
+      truckPath = drawPolyline(locations, 'green');
+      truckPath.setMap(handler.getMap());
+      setTimeout(worker, timeoutTime);
     }
-    else{
-      currentPosition = latLongs[0]
-      currentPosition["position"] = 0
-      resetAllStops();
-    }
-    return currentPosition
-  };
+  });
 
-  var resetAllStops = function(){
-    $.ajax({
-      url: 'locations/reset',
-      type: 'PUT',
-      success: function(data){
-        console.log("Successfully updated")
-      }
-    })
-  };
+};
+
+var updateLocation = function(stopType, currentPosition){
+  $.ajax({
+    url: stopType + '/update',
+    type: 'PUT',
+    data: {stopType : currentPosition},
+    success: function(data){
+      console.log("Successfully updated")
+    }
+  })
+}
+
+var getNextLocationFromJson = function(prevPosition){
+  if (latLongs.length > prevPosition.position + 1){
+    currentPosition = latLongs[prevPosition.position + 1]
+    currentPosition["position"] = prevPosition.position + 1
+  }
+  else{
+    currentPosition = latLongs[0]
+    currentPosition["position"] = 0
+    resetAllStops();
+  }
+  return currentPosition
+};
+
+var resetAllStops = function(){
+  $.ajax({
+    url: '/locations/reset',
+    type: 'PUT',
+    success: function(data){
+      console.log("Successfully updated")
+    }
+  })
+};
 	
 	var happiness_form = function(){
 
