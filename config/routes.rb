@@ -7,6 +7,10 @@ R14Team265::Application.routes.draw do
 
   resources :locations
 
+  get "truck_locations/last" => "truck_locations#show"
+
+  put "truck_locations/last" => "truck_locations#update"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
