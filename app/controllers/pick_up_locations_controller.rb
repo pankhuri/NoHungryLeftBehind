@@ -1,7 +1,7 @@
 class PickUpLocationsController < ApplicationController
   respond_to :json, :html, :js
   def update
-    @pick_up_location = PickUpLocation.where("latitude like '%?%' && longitude like '%?%'", pick_up_location_params[:latitude].to_f, pick_up_location_params[:longitude].to_f).first()
+    @pick_up_location = PickUpLocation.where("cast(latitude as text) like '%?%' && cast(longitude as text) like '%?%'", pick_up_location_params[:latitude].to_f, pick_up_location_params[:longitude].to_f).first()
     @pick_up_location.update_attributes(is_passed: true )      
     render json: @pick_up_location
   end 

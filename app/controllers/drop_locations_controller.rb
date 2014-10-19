@@ -11,3 +11,4 @@ class DropLocationsController < ApplicationController
 	end
 
 end
+
