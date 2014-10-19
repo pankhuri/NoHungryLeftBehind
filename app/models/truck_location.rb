@@ -1,0 +1,2 @@
+class TruckLocation < Location
+end
