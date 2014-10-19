@@ -75,7 +75,7 @@ function initializeMap(locations){
     markers = handler.addMarkers(locations);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
-    truckPath.setMap(handler.getMap());
+    truckPath.setMap(handler.getMap().setZoom(12));
   });
 
 }
