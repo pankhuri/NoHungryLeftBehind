@@ -87,6 +87,12 @@ function drawPolyline(startLocation,destinationLocation) {
 function initializeMap(locations)
 {
 
+  var symbolTwo = {
+    path: 'M -1,0 A 1,1 0 0 0 -3,0 1,1 0 0 0 -1,0M 1,0 A 1,1 0 0 0 3,0 1,1 0 0 0 1,0M -3,3 Q 0,5 3,3',
+    strokeColor: '#00F',
+    rotation: 45
+  };
+
    var truckRouteCoordinates = [];
     for(i =0;i<locations.length;i++)
     { 
@@ -102,7 +108,14 @@ function initializeMap(locations)
     geodesic: true,
     strokeColor: '#FF0000',
     strokeOpacity: 2.0,
-    strokeWeight: 4
+    strokeWeight: 4,
+    icons: [
+     {
+        icon: symbolTwo,
+        offset: '50%'
+      }
+    ]
+
   });
 
   var handler = Gmaps.build('Google');

@@ -8,10 +8,13 @@
 
 
 <script>
+
 		<% @location_hash.each_slice(2) do |location_hash|%>
 				drawPolyline({"latitude" :<%= location_hash.first[:lat]%>,"longitude" : <%=location_hash.first[:lng]%>},{"latitude" :<%=location_hash.last[:lat]%>,"longitude" : <%=location_hash.last[:lng]%>});
 		<%end%>
 
 		google.maps.event.addDomListener(window, "load", initializeMap(<%=raw @location_hash.to_json %>));
+
+
 
 </script>
