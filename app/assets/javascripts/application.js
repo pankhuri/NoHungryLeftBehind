@@ -23,11 +23,6 @@
 var handler = Gmaps.build('Google');
 
 $(function () {
-  // var latLongs = [{"latitude":"23", "longitude":"34", "position":"2"},{"latitude":"23", "longitude":"34", "position":"2"}]
-  // var latLongs = JSON.parse(data);
-  // var currentPosition = initialLatLong
-
-  // var initialLatLong = {}
 
   $.get('truck_locations/last', function(data){
     currentPosition = {"latitude":data.latitude, "longitude":data.longitude, "position":data.position}
@@ -38,11 +33,11 @@ $(function () {
   var worker = function(){
     currentPosition = getNextLocationFromJson(currentPosition)
     var timeoutTime = 2000;
-    if (currentPosition.pickUpLocation == "true"){
+    if (currentPosition.pickUpLocation == true){
       timeoutTime = 20000
       updateLocation('pick_up_location', currentPosition)
     }
-    else if (currentPosition.dropLocation == 'true'){
+    else if (currentPosition.dropLocation == true){
       timeoutTime = 30000
       updateLocation('drop_location', currentPosition)
     }
@@ -84,13 +79,24 @@ $(function () {
     else{
       currentPosition = latLongs[0]
       currentPosition["position"] = 0
+      resetAllStops();
     }
     return currentPosition
   };
-	
-	$(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
- 
-	$('.close-spread, .open-close').click(function () {
+
+  var resetAllStops = function(){
+    $.ajax({
+      url: 'location/reset',
+      type: 'PUT',
+      success: function(data){
+        console.log("Successfully updated")
+      }
+    })
+  };
+
+  $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
+
+  $('.close-spread, .open-close').click(function () {
 	    // Set the effect type
 	    var effect = 'slide';
 	    // Set the options for the effect type chosen
@@ -98,28 +104,28 @@ $(function () {
 	    // Set the duration (default: 400 milliseconds)
 	    var duration = 700;
 	    $('#toggle').toggle(effect, options, duration);
-	});
+   });
 
 
-	$( "#slider-range-min" ).slider({
-	range: "min",
-	value: 37,
-	min: 1,
-	max: 700,
-	slide: function( event, ui ) {
-	$( "#amount" ).val( ui.value );
-	}
-	});
-	$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+  $( "#slider-range-min" ).slider({
+    range: "min",
+    value: 37,
+    min: 1,
+    max: 700,
+    slide: function( event, ui ) {
+      $( "#amount" ).val( ui.value );
+    }
+  });
 
+  $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
 
-	 $( "#datepicker" ).datepicker({
-	showOn: "button",
-	buttonImageOnly: false,
-	buttonText: "Select date"
-	});
-	
-	$( "#speed" ).selectmenu();
+  $( "#datepicker" ).datepicker({
+    showOn: "button",
+    buttonImageOnly: false,
+    buttonText: "Select date"
+  });
+
+  $( "#speed" ).selectmenu();
 
 });
 
@@ -139,11 +145,11 @@ function drawPolyline(locations, color) {
     rotation: 45
   };
 
-   var truckRouteCoordinates = [];
-    for(i =0;i<locations.length;i++)
-    { 
-      truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
-    }
+  var truckRouteCoordinates = [];
+  for(i =0;i<locations.length;i++)
+  { 
+    truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
+  }
   var mapOptions = {
     zoom: 3,
     center: new google.maps.LatLng(0, -180),
@@ -157,10 +163,10 @@ function drawPolyline(locations, color) {
     strokeOpacity: 2.0,
     strokeWeight: 4,
     icons: [
-     {
-        icon: symbolTwo,
-        offset: '50%'
-      }
+    {
+      icon: symbolTwo,
+      offset: '50%'
+    }
     ]
 
   });
