@@ -1,8 +1,47 @@
+
+	<div class="header-outer">
+	<div class="container">
+	<div class="row">
+	<header>   
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+	<div class="innerHeader">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+	<a class="navbar-brand" href="/"> <%= image_tag("logo.png") %> </a>
+	</div>
+	<div class="navbar-right">
+	<a href="javascript:void(0)" class="red-button open-close"> Donate leftovers </a>
+	<a href="/locations" class="green-button"> Locate The Happiness Truck </a>
+
+	</div>
+	</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+	</nav>
+	</header>
+	</div>   
+	</div>
+	
+     <!-- Main title starts -->
+     <div class="container title-main">
+        <div class="row">
+           <div class="col-lg-12">
+              <h1 class="location-title">  Now You can track the happiness truck through this map </h1>
+           </div>
+        </div>
+     </div>
+     <!-- Main title ends -->
+
+
+
+
+
+
+
 <!-- Google map library files -->
 
 <!-- Google map div -->
-<div style='width: 800px;'>
-  <div id="feed_map" style='width: 1400px; height: 700px;'></div>
+  <div id="feed_map"> <!-- w3c empty div validate -->  </div>
 </div>
     
 
@@ -51,7 +90,30 @@
 // });
 // }
 // google.maps.event.addDomListener(window, "load", initialize);
-
 google.maps.event.addDomListener(window, "load", initializeMap(<%=raw @location_hash.to_json %>));
-
 </script>
+
+	
+	<!-- spread happiness starts -->
+	<%= render :partial => "donations/new", :locals => {:donation => @donation} %>
+	<!-- spread happiness ends -->
+	
+	
+	</div>
+	  <!-- header ends -->
+
+	  
+
+<!-- join happiness starts  -->
+<div class="join-happiness">
+	<div class="container">
+	<div class="row">
+    <h2> Join the happiness experiment </h2>
+	<a href="#" class="red-button"> Donate your leftovers </a>
+    </div>
+	</div>
+</div>
+<!-- join happiness ends  -->
+
+
+

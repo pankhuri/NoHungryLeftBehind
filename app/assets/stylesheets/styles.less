@@ -304,6 +304,11 @@ img {
 			text-align:center;
 			text-shadow: 1px 3px 2px #000000;	
 			text-transform: uppercase;
+			padding-bottom: 23px;
+		}
+		.location-title {
+		padding: 0 70px 23px;
+		word-spacing: 2px;
 		}
 	}
 	
@@ -646,7 +651,7 @@ overflow-y: auto;
 			.top {
 			    background: image-url("top-indicator.png") no-repeat 0 0;
 				height: 7px;
-				left: 92.2%;
+				right: 9px;
 				position: absolute;
 				top: -4px;
 				width: 9px;
@@ -655,7 +660,7 @@ overflow-y: auto;
 			    background: image-url("bottom-indicator.png") no-repeat 0 0;
 				bottom: -5px;
 				height: 7px;
-				left: 92.2%;
+				right: 9px;
 				position: absolute;
 				width: 9px;
 			}
@@ -756,6 +761,21 @@ table th {
 }
 
 
+/* location page starts */
+.feed_map {
+.float-left;
+height:746px;
+margin-bottom:100px;
+         
+	 iframe {
+		.float-left;
+		height:746px;
+	 }
+        
+}
+/* location page ends */
+
+
 
 /* paralax starts */
 #header, #intro, #second{
@@ -792,7 +812,7 @@ table th {
 /* join happiness starts */
 .join-happiness {
 background:#556270;
-padding:95px 0;
+padding:75px 0 100px;
 text-align:center;
 
      h2 {
@@ -853,6 +873,27 @@ text-align:center;
     line-height: 56px;
     padding: 0 118px 57px;
 }
+.spread-block .inner .right .top,
+.spread-block .inner .right .bottom {
+    right: 13px;
+}
+
+.spread-block .inner .right {
+    background-position: 97.2% 0;
+    }
+
+
+.spread-block .inner .left .date-block .green-light {
+    right: -17px;
+}
+
+.spread-block .inner .left .location .green-input {
+    right: -19px;
+}
+
+.spread-block .inner .left .location .ui-selectmenu-button.ui-widget.ui-state-default.ui-corner-all, .spread-block .inner .left .location .ui-state-default, .spread-block .inner .left .location .ui-widget-content .ui-state-default, .spread-block .inner .left .location .ui-widget-header .ui-state-default {
+    width: 108% !important;
+}
 
 }
 
@@ -860,6 +901,17 @@ text-align:center;
 @media(min-width:1400px) and (max-width:1650px){ 
 .header-outer .title-main {
     padding: 33px 0 65px;
+}
+.spread-block .inner .right .top,
+.spread-block .inner .right .bottom {
+    right: 9px;
+}
+.spread-block .inner .left .date-block .green-light {
+    right: -9px;
+}
+
+.spread-block .inner .left .location .green-input {
+    right: -11px;
 }
 }
 
