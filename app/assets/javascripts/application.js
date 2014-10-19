@@ -18,7 +18,7 @@
 //= require twitter/bootstrap
 //= require jquery-ui
 //= require jquery.backgroundSize
-//= require jquery.parallax-1.1.3
+
 //= require_tree .
 
 var handler = Gmaps.build('Google');
@@ -165,6 +165,11 @@ function initializeMap(locations){
     }
     return currentPosition
   };
+
+    $(".scroll-down").click(function (event) {
+  event.preventDefault();
+  $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
+  });
 	
 	$(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
  
@@ -178,16 +183,7 @@ function initializeMap(locations){
 	    $('#toggle').toggle(effect, options, duration);
 	});
 
-  // Digamber singh code starts.
-  $('#intro').parallax("50%", 0.1);
-  $('#second').parallax("50%", 0.1);
-  $('.bg').parallax("50%", 0.4);
-   
-  $(".scroll-down").click(function (event) {
-  event.preventDefault();
-  $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 800);
-  });
-  // Digamber singh code ends.
+  
 
 
 	$( "#slider-range-min" ).slider({
