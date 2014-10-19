@@ -181,6 +181,7 @@ var happiness_form = function(){
     showOn: "button",
     buttonImageOnly: false,
     buttonText: "Select date",
+		dateFormat: 'yy-mm-dd',
     onSelect:
     function(dateText, inst){
       $(this).parent().find(".message").show();
