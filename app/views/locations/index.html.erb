@@ -92,12 +92,6 @@
 // google.maps.event.addDomListener(window, "load", initialize);
 google.maps.event.addDomListener(window, "load", initializeMap(<%=raw @location_hash.to_json %>));
 </script>
-
-	
-	<!-- spread happiness starts -->
-	<%= render :partial => "donations/new", :locals => {:donation => @donation} %>
-	<!-- spread happiness ends -->
-	
 	
 	</div>
 	  <!-- header ends -->
@@ -109,7 +103,7 @@ google.maps.event.addDomListener(window, "load", initializeMap(<%=raw @location_
 	<div class="container">
 	<div class="row">
     <h2> Join the happiness experiment </h2>
-	<a href="#" class="red-button"> Donate your leftovers </a>
+	<a href="javascript:void(0)" class="red-button"> Donate your leftovers </a>
     </div>
 	</div>
 </div>

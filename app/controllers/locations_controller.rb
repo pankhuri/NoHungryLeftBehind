@@ -2,6 +2,7 @@ class LocationsController < ApplicationController
   respond_to :json, :html, :js  
   def index
     @locations = Location.stop_locations
+    initialize_donation
     @location_hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
@@ -33,6 +34,10 @@ class LocationsController < ApplicationController
 
   def location_params
     params.require(:location_params).permit(:id, :name, :position, :latitude, :longitude, :city)
+  end
+  
+  def initialize_donation
+    @donation = Donation.new
   end
   
 end
