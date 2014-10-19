@@ -174,3 +174,7 @@ function initializeMap(locations){
       }
     })
   };
+
+
+
+  
