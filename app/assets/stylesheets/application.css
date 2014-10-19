@@ -10,5 +10,8 @@
  *
  *= require_self
  *= require custom_bootstrap/custom_bootstrap
+ *= require jquery-ui/slider
+ *= require jquery-ui/datepicker
+ *= require jquery-ui/selectmenu
  *= require_tree .
  */

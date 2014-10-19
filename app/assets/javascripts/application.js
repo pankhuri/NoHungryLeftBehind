@@ -17,8 +17,9 @@
 //= require gmaps/google
 //= require twitter/bootstrap
 //= require jquery-ui
+//= require jquery-ui/slider
 //= require jquery.backgroundSize
-
+//= require jquery-ui/selectmenu
 //= require_tree .
 
 var handler = Gmaps.build('Google');
@@ -30,8 +31,7 @@ $(function () {
     locations = latLongs.slice(0,currentPosition.position)
     drawPolyline(locations, 'green')
   });
-
-
+	
   $(".header-outer, .panel1, .panel2, .panel3").css({backgroundSize: "cover"});
 
   $('.close-spread, .open-close').click(function () {
@@ -43,27 +43,9 @@ $(function () {
    var duration = 700;
    $('#toggle').toggle(effect, options, duration);
    });
-
-
-  $( "#slider-range-min" ).slider({
-    range: "min",
-    value: 37,
-    min: 1,
-    max: 700,
-    slide: function( event, ui ) {
-      $( "#amount" ).val( ui.value );
-    }
-  });
-
-  $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
-
-  $( "#datepicker" ).datepicker({
-    showOn: "button",
-    buttonImageOnly: false,
-    buttonText: "Select date"
-  });
-
-  $( "#speed" ).selectmenu();
+	 
+	 happiness_form();
+	
 
 });
 
@@ -233,3 +215,27 @@ function drawPolyline(locations, color) {
       }
     })
   };
+	
+	var happiness_form = function(){
+
+	  $("#slider-range-min").slider({
+	    range: "min",
+	    value: 0,
+	    min: 0,
+	    max: 35,
+	    change: function( event, ui ) {
+	      $( "#amount" ).val( ui.value );
+	    }
+	  });
+
+	  $( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
+
+	  $( "#datepicker" ).datepicker({
+	    showOn: "button",
+	    buttonImageOnly: false,
+	    buttonText: "Select date"
+	  });
+
+	  $( "#speed" ).selectmenu();
+	}
+

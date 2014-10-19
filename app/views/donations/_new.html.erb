@@ -1,4 +1,6 @@
-<%= form_for :donation do |f| %>
+
+<%= form_for donation do |f| %>
+
 	<div id="toggle" class="spread-block">
 		<div class="inner">
 		
@@ -8,12 +10,10 @@
 		<div class="left">
 		
 		<form class="form-horizontal" role="form">
-			<% f.fields_for :user_attributes do |user_form| %>
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Name</label>
 			<div class="col-sm-8">
-				
-    				<%= user_form.text_field :name, :class => "form-control" %>
+				<%= text_field_tag "[donation][user][name]", "", :class => "form-control" %>
     			  <small class="message"> Nice to meet you <strong> Pankhuri! </strong> </small>
 			  <small class="error-msg"> Show your error msg here. </small>
 			</div>
@@ -22,15 +22,15 @@
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Phone</label>
 			<div class="col-sm-8">
-			  	<%= user_form.text_field :phone, :class => "form-control" %>
+				<%= text_field_tag "[donation][user][phone]", "", :class => "form-control" %>
 			   <small class="message"> We will be able to call you, if necessary. </small>
 			</div>
 		  </div>
-		  <%end%>
+			
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Date</label>
 			<div class="col-sm-8 date-block">
-				<%= f.text_field :picked_at, :id=>"datepicker",:class=>"form-control"%>
+				<%#= f.text_field :picked_at, :id=>"datepicker",:class=>"form-control"%>
 			  <span class="green-light"> <!-- w3c empty div validate --> </span>
 			   <small class="message"> So, shall we call it a date? </small>
 			</div>
@@ -39,7 +39,7 @@
 		  <div class="form-group">
 			<label class="col-sm-4 control-label">Location</label>
 			<div class="col-sm-8 location">
-				<%= f.select :location, PickUpLocation.all.collect{|location| [location.name, location.id]},:id=>"speed", :class=>"form-control"%>
+				<%= f.select :location_id, PickUpLocation.all.collect{|location| [location.name, location.id]},:id=>"speed", :class=>"form-control"%>
 
 			<span class="green-input"> <!-- w3c empty validate --> </span>	
 			  <small class="message"> The Happiness Truck will be there at <strong> 17:30 </strong> </small>
@@ -53,6 +53,7 @@
 			  <div id="slider-range-min"> <!-- w3c empty div validate --> </div>
 			  <%= image_tag("count.png") %>
 			 </div> 
+			 <%= f.hidden_field :feed_how_many, :id => "amount"%>
 			  <span class="smiley-face"> <!-- w3c empty div validate --> </span> 
 			</div>
 		  </div>
@@ -60,7 +61,7 @@
 		  
 		  <div class="form-group">
 			<div class="col-sm-12">
-			  <button type="submit" class="btn">spread happiness</button>
+				<%= f.submit "spread happiness", :class => "btn" %>
 			</div>
 		  </div>
 		</form>
@@ -75,62 +76,13 @@
 		<span class="top"> <!-- w3c empty div validate --> </span>
 		<span class="bottom"> <!-- w3c empty div validate --> </span>
 		
-		<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-				<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-				<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-		
-				<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-		
-				<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-		
-				<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-						<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-						<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
-		
-						<div class="indicator"> 
-		<h4 class="location-title"> Janakpuri </h4> 
-		<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
-		<h5 class="time"> 18:00 </h5>  
-		</div>
+		<% Location.all.each do |location| %>
+			<div class="indicator"> 
+				<h4 class="location-title"> <%= location.name %> </h4> 
+				<i class="indicator-icon"> <!-- w3c empty div validate --> </i> 
+				<h5 class="time"> 18:00 </h5>  
+			</div>
+		<% end %>
 		
 		</div>
 		
