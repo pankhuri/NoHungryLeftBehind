@@ -11,7 +11,7 @@
   #  =========
 
   scope :stop_locations, -> {
-    where(ancestry: nil).first.descendants.where.not(type: 'TruckLocation')
+    where.not(type: 'TruckLocation')
   }
 
   def self.route_steps(origin, destination)
