@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   
   def index
-    @locations = Location.all
+    @locations = Location.stop_locations
     @location_hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude

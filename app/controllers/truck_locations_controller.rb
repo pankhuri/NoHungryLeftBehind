@@ -8,6 +8,7 @@ class TruckLocationsController < ApplicationController
       @truck_location = TruckLocation.new
     end
     @truck_location.attributes = truck_location_params
+    @truck_location.save
     render json: @truck_location
   end
 
@@ -20,7 +21,7 @@ class TruckLocationsController < ApplicationController
   end
 
   def truck_location_params
-    params.require(:truck_location).permit!
+    params.require(:truck_location).permit(:name, :position, :latitude, :longitude, :city)
   end
 
 

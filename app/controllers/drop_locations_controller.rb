@@ -6,7 +6,7 @@ class DropLocationsController < ApplicationController
 	end	
 
 	def drop_location_params
-		params.require(:drop_location).permit!
+		params.require(:drop_location).permit(:name, :position, :latitude, :longitude, :city)
 	end
 
 end

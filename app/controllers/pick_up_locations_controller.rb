@@ -6,7 +6,7 @@ class PickUpLocationsController < ApplicationController
   end 
 
   def pick_up_location_params
-    params.require(:pick_up_location).permit!
+    params.require(:pick_up_location).permit(:name, :position, :latitude, :longitude, :city)
   end
     
 end

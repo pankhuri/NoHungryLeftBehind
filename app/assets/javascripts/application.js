@@ -20,8 +20,10 @@
 //= require jquery.backgroundSize
 //= require_tree .
 
+var handler = Gmaps.build('Google');
+
 $(function () {
-  var latLongs = [{"latitude":"23", "longitude":"34", "position":"2"},{"latitude":"23", "longitude":"34", "position":"2"}]
+  // var latLongs = [{"latitude":"23", "longitude":"34", "position":"2"},{"latitude":"23", "longitude":"34", "position":"2"}]
   // var latLongs = JSON.parse(data);
   // var currentPosition = initialLatLong
 
@@ -35,7 +37,7 @@ $(function () {
 
   var worker = function(){
     currentPosition = getNextLocationFromJson(currentPosition)
-    var timeoutTime = 5000;
+    var timeoutTime = 2000;
     if (currentPosition.pickUpLocation == "true"){
       timeoutTime = 20000
       updateLocation('pick_up_location', currentPosition)
@@ -55,9 +57,13 @@ $(function () {
         setTimeout(worker, timeoutTime);
       }
     });
+    locations = latLongs.slice(0,currentPosition.position)
+    truckPath = drawPolyline(locations, 'green');
+    truckPath.setMap(handler.getMap());
+
   };
 
-  setTimeout(worker, 5000);
+  setTimeout(worker, 2000);
 
   var updateLocation = function(stopType, currentPosition){
     $.ajax({
@@ -121,7 +127,9 @@ function drawPolyline(locations, color) {
   var truckRouteCoordinates = [];
   for(i =0;i<locations.length;i++)
   { 
-    truckRouteCoordinates.push(new google.maps.LatLng(locations[i]["lat"], locations[i]["lng"]));
+    latitude = locations[i]["lat"] || locations[i].latitude
+    longitude = locations[i]["lng"] || locations[i].longitude
+    truckRouteCoordinates.push(new google.maps.LatLng(latitude, longitude));
   }
 
 
@@ -164,8 +172,7 @@ function drawPolyline(locations, color) {
 function initializeMap(locations)
 {
 
-  truckPath = drawPolyline(locations, '#FF0000')
-  var handler = Gmaps.build('Google');
+  truckPath = drawPolyline(locations, 'red')
 
   handler.buildMap({ provider: {}, internal: {id: 'feed_map'}}, function(){
     markers = handler.addMarkers(locations);

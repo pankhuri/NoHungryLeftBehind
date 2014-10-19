@@ -4,9 +4,16 @@ class Location < ActiveRecord::Base
   validates :name, :uniqueness => true
   
 	geocoded_by :full_address 
-	after_validation :geocode, :if => :name_changed?
+	after_validation :geocode, :if => :full_address_changed?
   
-  
+  #  =========
+  #  = Scope =
+  #  =========
+
+  scope :stop_locations, -> {
+    where(ancestry: nil).first.descendants.where.not(type: 'TruckLocation')
+  }
+
   def self.route_steps(origin, destination)
     result = fetch_route_from_google("driving", origin, destination)
     # if result.size < 8
@@ -23,6 +30,10 @@ class Location < ActiveRecord::Base
   
   def full_address
     name.concat(" #{city}")
+  end
+
+  def full_address_changed?
+    name_changed? or city_changed?
   end
   
 end
