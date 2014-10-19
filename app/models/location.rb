@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+  class Location < ActiveRecord::Base
 
 	has_ancestry
   validates :name, :uniqueness => true

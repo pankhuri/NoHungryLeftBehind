@@ -16,7 +16,7 @@ R14Team265::Application.routes.draw do
 
   put "drop_location/update" => "drop_locations#update"
 
-  put "locations/reset" => "locations#reset"
+  put "/locations/reset" => "locations#reset"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
