@@ -166,9 +166,24 @@ var happiness_form = function(){
     max: 35,
     change: function( event, ui ) {
      $( "#amount" ).val( ui.value );
-		 
+		 happiness_unit(ui.value);
    }
  });
+ 
+ var happiness_unit = function(feed_value){
+	 _smiley_element = $("#donation_form .smiley-face");
+	 _smiley_element.removeClass().addClass("smiley-face")
+	 if(feed_value>0 && feed_value<=10){
+	 	_smiley_element.addClass("smiley-face-ten-percent");
+	 }else if(feed_value>10 && feed_value<=20){
+	 	_smiley_element.addClass("smiley-face-twenty-percent");
+	 }else if(feed_value>20 && feed_value<=30){
+	 	_smiley_element.addClass("smiley-face-thirty-percent");
+	 }else if(feed_value>30){
+	 	_smiley_element.addClass("smiley-face-thirtyplus-percent");
+	 }
+   
+  };
 
   //$( "#amount" ).val( "$" + $( "#slider-range-min" ).slider( "value" ) );
 
